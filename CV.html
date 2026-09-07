@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alberto Ledesma - CV & Cover Letter</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0f172a; --secondary: #2563eb; --accent: #4f46e5;
+            --text: #334155; --light-text: #64748b; --bg: #f8fafc;
+            --white: #ffffff; --border: #e2e8f0;
+        }
+        * { box-sizing: border-box; transition: all 0.2s ease; }
+        body { font-family: 'Inter', sans-serif; line-height: 1.5; color: var(--text); background: var(--bg); margin: 0; padding: 20px; }
+        .container { max-width: 950px; margin: 0 auto; background: var(--white); padding: 40px; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+        .controls { position: fixed; top: 20px; right: 20px; display: flex; gap: 10px; z-index: 1000; }
+        header { display: flex; align-items: center; gap: 30px; border-bottom: 2px solid var(--bg); padding-bottom: 25px; margin-bottom: 25px; }
+        .profile-img { width: 140px; height: 140px; border-radius: 15px; object-fit: cover; border: 3px solid var(--secondary); background: #cbd5e1; }
+        .header-info { flex: 1; }
+        h1 { margin: 0; color: var(--primary); font-size: 2.2rem; letter-spacing: -0.05em; }
+        .subtitle { color: var(--secondary); font-weight: 700; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.1em; }
+        .contact-bar { display: flex; gap: 10px; margin-top: 15px; flex-wrap: wrap; }
+        .btn { text-decoration: none; padding: 8px 14px; border-radius: 8px; background: var(--primary); color: white; font-size: 0.8rem; font-weight: 600; display: inline-flex; align-items: center; gap: 6px; border: none; cursor: pointer; }
+        .btn-toggle-view { background: var(--accent); color: white; font-size: 0.85rem; font-weight: 600; padding: 8px 14px; border-radius: 8px; border: none; cursor: pointer; box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3); font-family: 'Inter', sans-serif; }
+        .btn-lang-select { background: var(--secondary); color: white; font-size: 0.85rem; font-weight: 600; padding: 8px 14px; border-radius: 8px; border: none; cursor: pointer; outline: none; box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2); font-family: 'Inter', sans-serif; }
+        .btn-lang-select option { background: white; color: var(--primary); font-weight: 600; }
+        .btn-download { background: #10b981; box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3); }
+        h2.section-title { color: var(--primary); font-size: 1.3rem; margin: 30px 0 20px 0; border-bottom: 2px solid var(--bg); padding-bottom: 8px; }
+        .grid-layers { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin-bottom: 30px; }
+        .layer-card { padding: 15px; border: 1px solid var(--border); border-radius: 10px; background: #fff; break-inside: avoid; }
+        .layer-card h3 { margin: 0 0 10px 0; color: var(--secondary); font-size: 0.9rem; text-transform: uppercase; }
+        .layer-card ul { padding-left: 15px; margin: 0; font-size: 0.85rem; color: var(--light-text); }
+        .experience-card { margin-bottom: 35px; break-inside: avoid; }
+        .exp-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; }
+        .exp-company { font-size: 1.2rem; font-weight: 700; color: var(--primary); }
+        .exp-role { font-size: 0.95rem; color: var(--secondary); font-weight: 600; display: block; }
+        .exp-date { font-size: 0.8rem; color: var(--light-text); background: var(--bg); padding: 3px 10px; border-radius: 15px; }
+        .exp-details { display: flex; gap: 20px; font-size: 0.85rem; margin-top: 10px; }
+        .exp-main { flex: 1; }
+        .exp-main ul { padding-left: 15px; margin-top: 8px; }
+        .exp-stack-box { width: 260px; background: var(--bg); padding: 12px; border-radius: 8px; flex-shrink: 0; height: fit-content; }
+        .exp-stack-box b { display: block; font-size: 0.7rem; text-transform: uppercase; color: var(--primary); margin-top: 8px; }
+        .edu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .edu-card { padding: 15px; border-radius: 10px; border: 1px solid var(--border); background: #fff; }
+        @media (max-width: 768px) {
+            body { padding: 10px; }
+            .container { padding: 25px 15px; margin-top: 60px; }
+            .controls {
+                position: fixed; top: 0; left: 0; right: 0;
+                background: rgba(15, 23, 42, 0.95);
+                backdrop-filter: blur(8px);
+                padding: 10px 15px;
+                gap: 8px;
+                justify-content: center;
+                flex-wrap: wrap;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            }
+            .controls .btn, .controls .btn-lang-select {
+                font-size: 0.75rem;
+                padding: 6px 10px;
+                flex: 1 1 auto;
+                justify-content: center;
+                text-align: center;
+            }
+            header {
+                flex-direction: column;
+                text-align: center;
+                gap: 15px;
+            }
+            h1 { font-size: 1.7rem; }
+            .subtitle { font-size: 0.85rem; }
+            .profile-img { width: 110px; height: 110px; }
+            .contact-bar {
+                justify-content: center;
+                flex-direction: column;
+                width: 100%;
+            }
+            .contact-bar .btn {
+                width: 100%;
+                word-break: break-all;
+                justify-content: center;
+                font-size: 0.75rem;
+                white-space: normal;
+                text-align: center;
+            }
+            .grid-layers, .edu-grid {
+                grid-template-columns: 1fr;
+            }
+            .exp-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 6px;
+            }
+            .exp-details {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .exp-stack-box {
+                width: 100%;
+            }
+            .qr-section {
+                flex-direction: column;
+                align-items: center;
+                gap: 20px;
+            }
+        }
+        @media print { body { background: white; padding: 0; } .container { box-shadow: none; border: none; width: 100%; padding: 0; margin-top: 0; } .controls { display: none; } }
+    </style>
+</head>
+<body>
+    <div class="controls">
+        <button class="btn btn-toggle-view" onclick="toggleDocView()" id="docViewBtn">📄 Carta de Presentación</button>
+        <select class="btn btn-lang-select" onchange="changeLanguage(this.value)" id="langSelect">
+            <option value="es">🇪🇸 Español</option>
+            <option value="en">🇬🇧 English</option>
+            <option value="fr">🇫🇷 Français</option>
+            <option value="pt">🇵🇹 Português</option>
+            <option value="nl">🇳🇱 Nederlands</option>
+            <option value="de">🇩🇪 Deutsch</option>
+        </select>
+        <button class="btn btn-download" onclick="window.print()" id="printBtn">📥 Descargar PDF</button>
+    </div>
+    <div class="container">
+        <header>
+            <img src="foto.jpg" alt="Perfil" class="profile-img" onerror="this.src='https://via.placeholder.com/140'">
+            <div class="header-info">
+                <div class="subtitle" id="mainTitle">Senior Full Stack Lead & Frontend Architect</div>
+                <h1>Alberto Ledesma Ollega</h1>
+                <div class="contact-bar">
+                    <a href="mailto:ledesma89alberto@gmail.com" class="btn">📧 ledesma89alberto@gmail.com</a>
+                    <a href="tel:+34622281415" class="btn">📞 +34 622 281 415</a>
+                    <a href="https://www.linkedin.com/in/alberto-ledesma-ollega-6727a651/" target="_blank" class="btn" style="background:#0077b5">🔗 linkedin.com/in/alberto-ledesma-ollega-6727a651/</a>
+                    <span id="englishLevel" style="display:none; padding: 8px 14px; border-radius: 8px; background: #f1f5f9; font-size: 0.8rem; font-weight: 700; border: 1px solid var(--border);">🇬🇧 English: C1 Advanced</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- CV View Container -->
+        <div id="cvView">
+            <h2 class="section-title" id="stackTitle">Core Stack & Arquitectura</h2>
+            <div class="grid-layers" id="gridLayers"></div>
+
+            <h2 class="section-title" id="expTitle">Experiencia Profesional</h2>
+            <div id="experienceContainer"></div>
+
+            <h2 class="section-title" id="eduTitle">Historial Académico</h2>
+            <div class="edu-grid" id="eduContainer"></div>
+        </div>
+
+        <!-- Cover Letter View Container -->
+        <div id="coverView" style="display:none;">
+            <div style="background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 35px; margin-top: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.03);">
+                <div style="display:inline-flex; align-items:center; gap:8px; background:var(--bg); padding:8px 16px; border-radius:20px; font-size:0.85rem; font-weight:700; color:var(--secondary); margin-bottom:25px; border: 1px solid var(--border);">
+                    <span id="coverTagline">💡 Pasión por la Tecnología & Versatilidad Profesional</span>
+                </div>
+                
+                <p id="coverGreeting" style="font-weight:700; font-size:1.05rem; color:var(--primary); margin-bottom:20px;"></p>
+                
+                <div style="font-size:0.95rem; line-height:1.75; color:var(--text);">
+                    <p id="coverP1" style="margin-bottom:18px;"></p>
+                    <p id="coverP2" style="margin-bottom:18px;"></p>
+                    <p id="coverP3" style="margin-bottom:25px;"></p>
+                </div>
+
+                <div style="margin-top:35px; border-top:1px dashed var(--border); padding-top:20px;">
+                    <p id="coverValediction" style="margin:0; font-weight:600; color:var(--light-text);"></p>
+                    <p style="margin:6px 0 0 0; font-weight:700; font-size:1.15rem; color:var(--primary);">Alberto Ledesma Ollega</p>
+                    <p style="margin:2px 0 0 0; font-size:0.85rem; color:var(--secondary); font-weight:600;">Senior Full Stack Lead & Frontend Architect</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="qr-section" style="display:flex; justify-content:center; gap:40px; margin-top:40px; padding-top:20px; border-top:1px dashed var(--border);">
+            <div style="text-align:center; font-size:0.7rem; font-weight:bold;">
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=80x80&data=https://www.linkedin.com/in/alberto-ledesma-ollega-6727a651/" style="width:80px; height:80px; margin-bottom:5px; border:1px solid var(--border);"><br>LINKEDIN
+            </div>
+            <div style="text-align:center; font-size:0.7rem; font-weight:bold;">
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=80x80&data=https://mi-portfolio-hazel.vercel.app/es" style="width:80px; height:80px; margin-bottom:5px; border:1px solid var(--border);"><br>PORTFOLIO
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const translations = {
+            es: {
+                printBtn: "📥 Descargar PDF", mainTitle: "Senior Full Stack Lead & Frontend Architect", phoneLabel: "Teléfono",
+                stackTitle: "Core Stack & Arquitectura", expTitle: "Experiencia Profesional", eduTitle: "Historial Académico", englishLevelText: "",
+                btnCoverLetter: "📄 Carta de Presentación", btnViewCV: "📋 Ver Curriculum Vitae",
+                coverTagline: "💡 Pasión por la Tecnología & Versatilidad Profesional",
+                coverGreeting: "Estimado/a responsable de selección / equipo de desarrollo,",
+                coverP1: "Me dirijo a usted con el entusiasmo de quien tiene la fortuna de ejercer diariamente su profesión favorita: la ingeniería de software y la arquitectura de sistemas Full Stack. Con más de 12 años de experiencia liderando y desarrollando soluciones digitales de alto impacto, mi motor principal sigue siendo el mismo desde el primer día: escribir código limpio, escalable y transformar retos complejos en productos de excelencia.",
+                coverP2: "A lo largo de mi trayectoria he diseñado sistemas frontend y backend (React, Next.js, Vue.js, Angular, Node.js) y gestionado entornos cloud (GCloud, AWS, Docker). Entiendo la colaboración técnica desde la máxima flexibilidad: por ello, ofrezco mis servicios tanto en modalidad de <strong>consultoría freelance (contrato mercantil / B2B)</strong> como a través de <strong>diferentes tipos de contratación laboral</strong> (remoto, híbrido, jornada completa o por proyectos), adaptándome a las necesidades reales de su organización.",
+                coverP3: "Mi objetivo es continuar evolucionando profesionalmente junto a equipos ambiciosos, aportando visión técnica estratégica, solidez y un liderazgo positivo. Estaré encantado de mantener una conversación para profundizar en cómo puedo contribuir al éxito de sus próximos proyectos.",
+                coverValediction: "Atentamente,",
+                layers: [
+                    { h3: "Frontend & SEO Expert", items: ["React / Next.js / Vue.js / Angular", "Core Web Vitals & SEO Técnico", "Performance Opt. & SSR"] },
+                    { h3: "API & Business Logic", items: ["Node.js / Express Architecture", "Cron Jobs & Webhooks", "Scalable RESTful Services"] },
+                    { h3: "Cloud & Infrastructure", items: ["Docker Containerization", "GCloud / AWS Management", "Advanced CI/CD Pipelines"] },
+                    { h3: "Data & Intelligent Media", items: ["PostgreSQL / MongoDB", "Cloudinary (Asset Workflow)", "AI (HeyGen / PIPECAT)"] }
+                ],
+                experiences: [
+                    {
+                        company: "ACCENTURE", role: "Desarrollador Front-end (Consultoría Freelance)", date: "mar. 2026 - ago. 2026 (6 meses)",
+                        desc: "Consultor frontend freelance integrado en el equipo de desarrollo para una gran plataforma analítica en el sector asegurador.",
+                        bullets: [
+                            "Desarrollo y mantenimiento de componentes de interfaz de usuario con Vue.js y TypeScript para visualización de datos complejos y gestión de informes.",
+                            "Resolución de incidencias técnicas en flujos transversales de la aplicación, garantizando la sincronización de datos entre vistas de UI y módulos de exportación.",
+                            "Optimización y corrección de bugs de tipado estricto y formateo numérico en informes descargables.",
+                            "Participación activa en Code Reviews, resolución de hilos técnicos en entornos de integración continua y mantenimiento de la calidad de código mediante test coverage."
+                        ],
+                        stack: { f: "Vue.js, TypeScript", l: "Data Sync, Export Modules", d: "CI/CD, Code Reviews, Testing" }
+                    },
+                    {
+                        company: "GFT (Proyecto Avatar IA)", role: "Technical Lead (Consultoría Freelance)", date: "may. 2024 - ago. 2025 (1 año 3 meses)",
+                        desc: "Liderazgo técnico como consultor freelance especializado en el desarrollo de un avatar interactivo de IA para ferias de alto nivel.",
+                        bullets: [
+                            "Arquitectura de baja latencia para respuesta en tiempo real mediante IA generativa.",
+                            "Garantía de calidad mediante Testing Unitario y pipelines de CI/CD.",
+                            "Traducción de diseños complejos de Figma a interfaces pixel-perfect."
+                        ],
+                        stack: { f: "Next.js, React, Tailwind", l: "HeyGen, PIPECAT, Webhooks", d: "CI/CD, Code Reviews" }
+                    },
+                    {
+                        company: "Erescambio Marketing", role: "Responsable Técnico Full Stack", date: "oct. 2021 - Actualidad",
+                        desc: "Transformación digital y optimización de rendimiento para plataformas de marketing.",
+                        bullets: [
+                            "Implementación de arquitecturas Headless CMS con WordPress.",
+                            "Optimización de assets mediante Cloudinary mejorando el LCP y SEO.",
+                            "Interfaces autogestionables que reducen costes operativos."
+                        ],
+                        stack: { f: "React, Headless CMS", l: "Cloudinary, REST APIs", d: "SEO Técnico, Web Vitals" }
+                    },
+                    {
+                        company: "JUBILAME", role: "Jefe Técnico & Angular Developer", date: "may. 2020 - ene. 2024",
+                        desc: "Dirección técnica en producto Fintech con enfoque en automatización y escalabilidad.",
+                        bullets: [
+                            "Automatización de procesos financieros críticos mediante Cron Jobs robustos.",
+                            "Gestión de infraestructura escalable en Google Cloud utilizando Docker.",
+                            "Establecimiento de cultura de calidad con testing E2E (Cypress)."
+                        ],
+                        stack: { f: "Angular, TypeScript", l: "Cron Jobs, PostgreSQL", d: "Docker, GCloud, Jira" }
+                    },
+                    {
+                        company: "CONSULTORÍA SENIOR (Autónomo)", role: "Upfield, Amovens & Grandes Cuentas", date: "ene. 2016 - Actualidad",
+                        desc: "Soluciones escalables para retos técnicos complejos en empresas líderes.",
+                        bullets: [
+                            "Upfield: Dashboard logístico global con sincronización masiva de inventario (Cron Jobs).",
+                            "Amovens: Optimización core de React y estabilización mediante suites de testing Jest.",
+                            "SEO: Consultoría técnica especializada para maximizar el tráfico orgánico."
+                        ],
+                        stack: { f: "React, Node.js, Docker", l: "API Rate Limiting, Cron Jobs", d: "Jest, Unit Testing" }
+                    }
+                ],
+                education: [
+                    { title: "Grado en Ingeniería de Software", school: "MasterD", date: "2008 - 2011" },
+                    { title: "Máster en Programación Web Full Stack", school: "MasterD", date: "2011 - 2013" },
+                    { title: "Técnico Superior en Desarrollo de Apps Multiplataforma (DAM)", school: "IES Nervión (Sevilla)", date: "2008 - 2010" },
+                    { title: "Certificación Oficial en React & Frontend Architecture", school: "Curso Regulado / Titulación Oficial", date: "2021" },
+                    { title: "Certificación Regulada en SQL & Gestores de Bases de Datos", school: "Titulación Oficial Avanzada", date: "2019" },
+                    { title: "Especialización Oficial en Data Science & IA (Python / ML)", school: "Curso Regulado Profesional", date: "2023" },
+                    { title: "Certificación Oficial Cloud Infrastructure & DevOps (AWS/Docker)", school: "Titulación Regulada", date: "2022" }
+                ]
+            },
+            en: {
+                printBtn: "📥 Download PDF", mainTitle: "Senior Full Stack Lead & Frontend Architect", phoneLabel: "Phone",
+                stackTitle: "Core Stack & Architecture", expTitle: "Professional Experience", eduTitle: "Academic History", englishLevelText: "🇬🇧 English: C1 Advanced",
+                btnCoverLetter: "📄 Cover Letter", btnViewCV: "📋 View Curriculum Vitae",
+                coverTagline: "💡 Passion for Technology & Professional Versatility",
+                coverGreeting: "Dear Hiring Manager / Talent Acquisition Team,",
+                coverP1: "I am writing to express my enthusiasm as someone fortunate enough to work every day in their favorite profession: software engineering and Full Stack system architecture. With over 12 years of experience leading and building high-impact digital solutions, my core motivation remains unchanged: writing clean, scalable code and transforming complex technical challenges into exceptional products.",
+                coverP2: "Throughout my career, I have architected frontend and backend systems (React, Next.js, Vue.js, Angular, Node.js) and managed cloud infrastructure (GCloud, AWS, Docker). I approach technical collaboration with ultimate flexibility: therefore, I offer my services both via <strong>freelance consulting (B2B contract)</strong> and through <strong>various employment contract models</strong> (remote, hybrid, full-time, or project-based), tailoring my engagement to your organization's specific goals.",
+                coverP3: "My objective is to continue growing professionally alongside ambitious teams, contributing strategic vision, technical excellence, and positive leadership. I would welcome the opportunity to discuss how my background and expertise can drive success for your upcoming initiatives.",
+                coverValediction: "Best regards,",
+                layers: [
+                    { h3: "Frontend & SEO Expert", items: ["React / Next.js / Vue.js / Angular", "Core Web Vitals & Technical SEO", "Performance Opt. & SSR"] },
+                    { h3: "API & Business Logic", items: ["Node.js / Express Architecture", "Cron Jobs & Webhooks", "Scalable RESTful Services"] },
+                    { h3: "Cloud & Infrastructure", items: ["Docker Containerization", "GCloud / AWS Management", "Advanced CI/CD Pipelines"] },
+                    { h3: "Data & Intelligent Media", items: ["PostgreSQL / MongoDB", "Cloudinary (Asset Workflow)", "AI (HeyGen / PIPECAT)"] }
+                ],
+                experiences: [
+                    {
+                        company: "ACCENTURE", role: "Front-end Developer (Freelance Consultant)", date: "Mar. 2026 - Aug. 2026 (6 mos)",
+                        desc: "Integrated as a freelance frontend consultant into the development team for a major analytical platform within the insurance sector.",
+                        bullets: [
+                            "Developed and maintained user interface components using Vue.js and TypeScript for complex data visualization and report management.",
+                            "Resolved technical incidents across cross-cutting application flows, ensuring seamless data synchronization between UI views and document export modules.",
+                            "Fixed and optimized bugs related to strict data typing and numeric data formatting within downloadable reports.",
+                            "Actively participated in Code Reviews, addressed technical threads in continuous integration environments, and maintained code quality through test coverage."
+                        ],
+                        stack: { f: "Vue.js, TypeScript", l: "Data Sync, Export Modules", d: "CI/CD, Code Reviews, Testing" }
+                    },
+                    {
+                        company: "GFT (AI Avatar Project)", role: "Technical Lead (Freelance Consultant)", date: "May 2024 - Aug. 2025 (1y 3m)",
+                        desc: "Technical leadership as a freelance consultant in the development of an interactive AI avatar for trade shows.",
+                        bullets: [
+                            "Low-latency architecture for real-time response using generative AI.",
+                            "QA through Unit Testing and CI/CD pipelines for live events.",
+                            "Figma-to-code translation for pixel-perfect interfaces."
+                        ],
+                        stack: { f: "Next.js, React, Tailwind", l: "HeyGen, PIPECAT, Webhooks", d: "CI/CD, Code Reviews" }
+                    },
+                    {
+                        company: "Erescambio Marketing", role: "Technical Full Stack Lead", date: "Oct. 2021 - Present",
+                        desc: "Digital transformation and performance optimization for marketing platforms.",
+                        bullets: [
+                            "Headless CMS implementation with WordPress to maximize speed.",
+                            "Asset optimization via Cloudinary significantly improving SEO.",
+                            "Self-managed interfaces reducing client operational costs."
+                        ],
+                        stack: { f: "React, Headless CMS", l: "Cloudinary, REST APIs", d: "Technical SEO, Web Vitals" }
+                    },
+                    {
+                        company: "JUBILAME", role: "Technical Lead & Angular Developer", date: "May 2020 - Jan. 2024",
+                        desc: "Technical direction in Fintech product focused on automation.",
+                        bullets: [
+                            "Automation of critical financial processes via robust Cron Jobs.",
+                            "Scalable infrastructure on Google Cloud using Docker.",
+                            "Establishing a quality culture with E2E testing (Cypress)."
+                        ],
+                        stack: { f: "Angular, TypeScript", l: "Cron Jobs, PostgreSQL", d: "Docker, GCloud, Jira" }
+                    },
+                    {
+                        company: "SENIOR CONSULTING (Freelance)", role: "Upfield, Amovens & Enterprise Clients", date: "Jan. 2016 - Present",
+                        desc: "Scalable solutions for complex technical challenges in leading companies.",
+                        bullets: [
+                            "Upfield: Global logistics Dashboard with massive inventory synchronization.",
+                            "Amovens: React core optimization and stabilization via Jest testing.",
+                            "SEO: Specialized technical consulting to maximize organic traffic."
+                        ],
+                        stack: { f: "React, Node.js, Docker", l: "API Rate Limiting, Cron Jobs", d: "Jest, Unit Testing" }
+                    }
+                ],
+                education: [
+                    { title: "Bachelor's Degree in Software Engineering", school: "MasterD", date: "2008 - 2011" },
+                    { title: "Master's Degree in Full Stack Web Development", school: "MasterD", date: "2011 - 2013" },
+                    { title: "Higher Degree in Multiplatform Application Dev (DAM)", school: "IES Nervión (Seville)", date: "2008 - 2010" },
+                    { title: "Official Certification in React & Frontend Architecture", school: "Regulated Professional Course", date: "2021" },
+                    { title: "Regulated Certification in SQL & Database Management", school: "Official Advanced Qualification", date: "2019" },
+                    { title: "Official Specialization in Data Science & AI (Python / ML)", school: "Regulated Professional Course", date: "2023" },
+                    { title: "Official Certification in Cloud Infrastructure & DevOps (AWS/Docker)", school: "Regulated Qualification", date: "2022" }
+                ]
+            },
+            fr: {
+                printBtn: "📥 Télécharger le PDF", mainTitle: "Senior Full Stack Lead & Architecte Frontend", phoneLabel: "Téléphone",
+                stackTitle: "Stack Principal & Architecture", expTitle: "Expérience Professionnelle", eduTitle: "Parcours Académique", englishLevelText: "🇬🇧 Anglais : C1 Avancé",
+                btnCoverLetter: "📄 Lettre de Motivation", btnViewCV: "📋 Voir le CV",
+                coverTagline: "💡 Passion pour la Technologie & Polyvalence Professionnelle",
+                coverGreeting: "Madame, Monsieur, Responsable du recrutement / Équipe technique,",
+                coverP1: "Je m'adresse à vous avec l'enthousiasme de celui qui a la chance d'exercer quotidiennement sa profession favorite : l'ingénierie logicielle et l'architecture de systèmes Full Stack. Avec plus de 12 ans d'expérience dans la direction et le développement de solutions numériques à haut impact, ma motivation principale reste la même depuis le premier jour : écrire un code propre, évolutif et transformer des défis complexes en produits d'excellence.",
+                coverP2: "Tout au long de mon parcours, j'ai conçu des systèmes frontend et backend (React, Next.js, Vue.js, Angular, Node.js) et géré des environnements cloud (GCloud, AWS, Docker). J'aborde la collaboration technique avec une flexibilité maximale : c'est pourquoi je propose mes services aussi bien en <strong>consulting freelance (contrat B2B)</strong> que via <strong>différents types de contrats de travail</strong> (à distance, hybride, temps plein ou au projet), en m'adaptant aux besoins spécifiques de votre organisation.",
+                coverP3: "Mon objectif est de continuer à évoluer professionnellement au sein d'équipes ambitieuses, en apportant une vision stratégique, une rigueur technique et un leadership positif. Je serais ravi de vous rencontrer lors d'un entretien pour échanger sur la manière dont mon expérience peut contribuer au succès de vos futurs projets.",
+                coverValediction: "Veuillez agréer mes salutations distinguées,",
+                layers: [
+                    { h3: "Expert Frontend & SEO", items: ["React / Next.js / Vue.js / Angular", "Core Web Vitals & SEO Technique", "Optimisation de Performance & SSR"] },
+                    { h3: "API & Logique Métier", items: ["Architecture Node.js / Express", "Cron Jobs & Webhooks", "Services RESTful Évolutifs"] },
+                    { h3: "Cloud & Infrastructure", items: ["Conteneurisation Docker", "Gestion GCloud / AWS", "Pipelines CI/CD Avancées"] },
+                    { h3: "Données & Média Intelligent", items: ["PostgreSQL / MongoDB", "Cloudinary (Asset Workflow)", "IA (HeyGen / PIPECAT)"] }
+                ],
+                experiences: [
+                    {
+                        company: "ACCENTURE", role: "Développeur Front-end (Consulting Freelance)", date: "mars 2026 - août 2026 (6 mois)",
+                        desc: "Consultant frontend freelance intégré à l'équipe de développement pour une grande plateforme analytique dans le secteur de l'assurance.",
+                        bullets: [
+                            "Développement et maintenance de composants d'interface utilisateur avec Vue.js et TypeScript pour la visualisation de données complexes et la gestion de rapports.",
+                            "Résolution d'incidents techniques sur des flux transversaux d'applications, garantissant une synchronisation fluide des données entre les vues UI et les modules d'exportation.",
+                            "Optimisation et correction de bugs liés au typage strict des données et au formatage numérique dans les rapports téléchargeables.",
+                            "Participation active aux Code Reviews, résolution de sujets techniques dans des environnements d'intégration continue et maintien de la qualité du code par le test coverage."
+                        ],
+                        stack: { f: "Vue.js, TypeScript", l: "Data Sync, Export Modules", d: "CI/CD, Code Reviews, Testing" }
+                    },
+                    {
+                        company: "GFT (Projet Avatar IA)", role: "Technical Lead (Consulting Freelance)", date: "mai 2024 - août 2025 (1 an 3 mois)",
+                        desc: "Leadership technique en tant que consultant freelance spécialisé dans le développement d'un avatar IA interactif pour des salons professionnels de haut niveau.",
+                        bullets: [
+                            "Architecture à faible latence pour des réponses en temps réel via l'IA générative.",
+                            "Assurance qualité via des tests unitaires et des pipelines CI/CD pour des événements en direct.",
+                            "Intégration fidèle de designs complexes Figma vers des interfaces pixel-perfect."
+                        ],
+                        stack: { f: "Next.js, React, Tailwind", l: "HeyGen, PIPECAT, Webhooks", d: "CI/CD, Code Reviews" }
+                    },
+                    {
+                        company: "Erescambio Marketing", role: "Responsable Technique Full Stack", date: "oct. 2021 - Présent",
+                        desc: "Transformation numérique et optimisation des performances pour plateformes marketing.",
+                        bullets: [
+                            "Mise en œuvre d'architectures Headless CMS avec WordPress.",
+                            "Optimisation des assets via Cloudinary améliorant considérablement le LCP et le SEO.",
+                            "Interfaces auto-gérables réduisant les coûts opérationnels."
+                        ],
+                        stack: { f: "React, Headless CMS", l: "Cloudinary, REST APIs", d: "SEO Technique, Web Vitals" }
+                    },
+                    {
+                        company: "JUBILAME", role: "Lead Technique & Développeur Angular", date: "mai 2020 - janv. 2024",
+                        desc: "Direction technique d'un produit Fintech axé sur l'automatisation et l'évolutivité.",
+                        bullets: [
+                            "Automatisation de processus financiers critiques via des Cron Jobs robustes.",
+                            "Gestion d'infrastructures évolutives sur Google Cloud avec Docker.",
+                            "Mise en place d'une culture de qualité avec des tests E2E (Cypress)."
+                        ],
+                        stack: { f: "Angular, TypeScript", l: "Cron Jobs, PostgreSQL", d: "Docker, GCloud, Jira" }
+                    },
+                    {
+                        company: "CONSULTING SENIOR (Indépendant)", role: "Upfield, Amovens & Grands Comptes", date: "janv. 2016 - Présent",
+                        desc: "Solutions évolutives pour des défis techniques complexes chez des entreprises leaders.",
+                        bullets: [
+                            "Upfield : Dashboard logistique mondial avec synchronisation massive des stocks.",
+                            "Amovens : Optimisation du cœur React et stabilisation via des suites de tests Jest.",
+                            "SEO : Conseil technique spécialisé pour maximiser le trafic organique."
+                        ],
+                        stack: { f: "React, Node.js, Docker", l: "API Rate Limiting, Cron Jobs", d: "Jest, Unit Testing" }
+                    }
+                ],
+                education: [
+                    { title: "Licence en Ingénierie Logicielle", school: "MasterD", date: "2008 - 2011" },
+                    { title: "Master en Développement Web Full Stack", school: "MasterD", date: "2011 - 2013" },
+                    { title: "Diplôme Supérieur DAM (Développement d'Apps Multiplateformes)", school: "IES Nervión (Séville)", date: "2008 - 2010" },
+                    { title: "Certification Officielle React & Architecture Frontend", school: "Formation Réglementée", date: "2021" },
+                    { title: "Certification Réglementée SQL & Gestion de Bases de Données", school: "Diplôme Officiel Avancé", date: "2019" },
+                    { title: "Spécialisation Officielle Data Science & IA (Python / ML)", school: "Formation Réglementée Pro", date: "2023" },
+                    { title: "Certification Officielle Infrastructure Cloud & DevOps (AWS/Docker)", school: "Diplôme Réglementé", date: "2022" }
+                ]
+            },
+            pt: {
+                printBtn: "📥 Baixar PDF", mainTitle: "Senior Full Stack Lead & Arquiteto Frontend", phoneLabel: "Telefone",
+                stackTitle: "Core Stack & Arquitetura", expTitle: "Experiência Profissional", eduTitle: "Histórico Acadêmico", englishLevelText: "🇬🇧 Inglês: C1 Avançado",
+                btnCoverLetter: "📄 Carta de Apresentação", btnViewCV: "📋 Ver CV",
+                coverTagline: "💡 Paixão pela Tecnologia & Versatilidade Profissional",
+                coverGreeting: "Prezado(a) responsável de recrutamento / equipe técnica,",
+                coverP1: "Escrevo com o entusiasmo de quem tem a sorte de exercer diariamente sua profissão favorita: a engenharia de software e a arquitetura de sistemas Full Stack. Com mais de 12 anos de experiência liderando e desenvolvendo soluções digitais de alto impacto, minha motivação principal continua sendo a mesma desde o primeiro dia: escrever código limpo, escalável e transformar desafios complexos em produtos de excelência.",
+                coverP2: "Ao longo da minha trajetória, projetei sistemas frontend e backend (React, Next.js, Vue.js, Angular, Node.js) e gerenciei ambientes em nuvem (GCloud, AWS, Docker). Entando a colaboração técnica a partir da máxima flexibilidade: por isso, ofereço meus serviços tanto em modalidade de <strong>consultoria freelance (contrato B2B)</strong> quanto por meio de <strong>diferentes tipos de contratação de trabalho</strong> (remoto, híbrido, tempo integral ou por projetos), adaptando-me às necessidades reais da sua organização.",
+                coverP3: "Meu objetivo é continuar evoluindo profissionalmente ao lado de equipes ambiciosas, trazendo visão técnica estratégica, solidez e uma liderança positiva. Terei todo o prazer em agendar uma conversa para aprofundar como minha experiência pode contribuir para o sucesso dos seus próximos projetos.",
+                coverValediction: "Atenciosamente,",
+                layers: [
+                    { h3: "Especialista Frontend & SEO", items: ["React / Next.js / Vue.js / Angular", "Core Web Vitals & SEO Técnico", "Otimização de Performance & SSR"] },
+                    { h3: "API & Lógica de Negócios", items: ["Arquitetura Node.js / Express", "Cron Jobs & Webhooks", "Serviços RESTful Escaláveis"] },
+                    { h3: "Nuvem & Infraestrutura", items: ["Containerização Docker", "Gestão GCloud / AWS", "Pipelines CI/CD Avançados"] },
+                    { h3: "Dados & Mídia Inteligente", items: ["PostgreSQL / MongoDB", "Cloudinary (Asset Workflow)", "IA (HeyGen / PIPECAT)"] }
+                ],
+                experiences: [
+                    {
+                        company: "ACCENTURE", role: "Desenvolvedor Front-end (Consultoria Freelance)", date: "mar. 2026 - ago. 2026 (6 meses)",
+                        desc: "Consultor frontend freelance integrado à equipe de desenvolvimento para uma grande plataforma analítica no setor de seguros.",
+                        bullets: [
+                            "Desenvolvimento e manutenção de componentes de interface de usuário com Vue.js e TypeScript para visualização de dados complexos e gestão de relatórios.",
+                            "Resolução de incidentes técnicos em fluxos transversais da aplicação, garantindo sincronização fluida de dados entre exibições de UI e módulos de exportação.",
+                            "Otimização e correção de bugs relacionados a tipagem estrita de dados e formatação numérica em relatórios baixáveis.",
+                            "Participação ativa em Code Reviews, resolução de tópicos técnicos em ambientes de integração contínua e manutenção da qualidade de código via test coverage."
+                        ],
+                        stack: { f: "Vue.js, TypeScript", l: "Data Sync, Export Modules", d: "CI/CD, Code Reviews, Testing" }
+                    },
+                    {
+                        company: "GFT (Projeto Avatar IA)", role: "Technical Lead (Consultoria Freelance)", date: "mai. 2024 - ago. 2025 (1 ano 3 meses)",
+                        desc: "Liderança técnica como consultor freelance especializado no desenvolvimento de um avatar interativo de IA para feiras de alto nível.",
+                        bullets: [
+                            "Arquitetura de baixa latência para resposta em tempo real via IA generativa.",
+                            "Garantia de qualidade via testes unitários e pipelines CI/CD para eventos ao vivo.",
+                            "Tradução de designs complexos do Figma para interfaces pixel-perfect."
+                        ],
+                        stack: { f: "Next.js, React, Tailwind", l: "HeyGen, PIPECAT, Webhooks", d: "CI/CD, Code Reviews" }
+                    },
+                    {
+                        company: "Erescambio Marketing", role: "Líder Técnico Full Stack", date: "out. 2021 - Presente",
+                        desc: "Transformação digital e otimização de performance para plataformas de marketing.",
+                        bullets: [
+                            "Implementação de arquiteturas Headless CMS com WordPress.",
+                            "Otimização de assets via Cloudinary melhorando significativamente LCP e SEO.",
+                            "Interfaces autogerenciáveis que reduzem custos operacionais."
+                        ],
+                        stack: { f: "React, Headless CMS", l: "Cloudinary, REST APIs", d: "SEO Técnico, Web Vitals" }
+                    },
+                    {
+                        company: "JUBILAME", role: "Líder Técnico & Desenvolvedor Angular", date: "mai. 2020 - jan. 2024",
+                        desc: "Direção técnica em produto Fintech com foco em automação e escalabilidade.",
+                        bullets: [
+                            "Automação de processos financeiros críticos via Cron Jobs robustos.",
+                            "Gestão de infraestrutura escalável no Google Cloud utilizando Docker.",
+                            "Estabelecimento de cultura de qualidade com testes E2E (Cypress)."
+                        ],
+                        stack: { f: "Angular, TypeScript", l: "Cron Jobs, PostgreSQL", d: "Docker, GCloud, Jira" }
+                    },
+                    {
+                        company: "CONSULTORIA SENIOR (Autônomo)", role: "Upfield, Amovens & Grandes Contas", date: "jan. 2016 - Presente",
+                        desc: "Soluções escaláveis para desafios técnicos complexos em empresas líderes.",
+                        bullets: [
+                            "Upfield: Dashboard logístico global com sincronização massiva de estoque.",
+                            "Amovens: Otimização do core do React e estabilização via suítes de testes Jest.",
+                            "SEO: Consultoria técnica especializada para maximizar o tráfego orgânico."
+                        ],
+                        stack: { f: "React, Node.js, Docker", l: "API Rate Limiting, Cron Jobs", d: "Jest, Unit Testing" }
+                    }
+                ],
+                education: [
+                    { title: "Graduação em Engenharia de Software", school: "MasterD", date: "2008 - 2011" },
+                    { title: "Mestrado em Desenvolvimento Web Full Stack", school: "MasterD", date: "2011 - 2013" },
+                    { title: "Técnico Superior DAM (Dev. de Aplicações Multiplataforma)", school: "IES Nervión (Sevilha)", date: "2008 - 2010" },
+                    { title: "Certificação Oficial em React & Arquitetura Frontend", school: "Curso Regulamentado", date: "2021" },
+                    { title: "Certificação Regulamentada em SQL & Gestão de Bancos de Dados", school: "Titulação Oficial Avançada", date: "2019" },
+                    { title: "Especialização Oficial em Data Science & IA (Python / ML)", school: "Curso Regulamentado Pro", date: "2023" },
+                    { title: "Certificação Oficial Cloud Infrastructure & DevOps (AWS/Docker)", school: "Titulação Regulamentada", date: "2022" }
+                ]
+            },
+            nl: {
+                printBtn: "📥 PDF downloaden", mainTitle: "Senior Full Stack Lead & Frontend Architect", phoneLabel: "Telefoon",
+                stackTitle: "Core Stack & Architectuur", expTitle: "Werkervaring", eduTitle: "Opleiding", englishLevelText: "🇬🇧 Engels: C1 Advanced",
+                btnCoverLetter: "📄 Sollicitatiebrief", btnViewCV: "📋 Bekijk Curriculum Vitae",
+                coverTagline: "💡 Passie voor Technologie & Professionele Veelzijdigheid",
+                coverGreeting: "Beste recruitment manager / talent team,",
+                coverP1: "Ik schrijf u met het enthousiasme van iemand die het geluk heeft elke dag te werken in zijn favoriete beroep: software engineering en Full Stack systeemarchitectuur. Met meer dan 12 jaar ervaring in het leiden en bouwen van hoogwaardige digitale oplossingen, blijft mijn drijfveer ongewijzigd: het schrijven van schone, schaalbare code en het omzetten van complexe uitdagingen in uitstekende producten.",
+                coverP2: "Gedurende mijn carrière heb ik frontend- en backend-systemen ontworpen (React, Next.js, Vue.js, Angular, Node.js) en cloudinfrastructuur beheerd (GCloud, AWS, Docker). Ik benader technische samenwerking met maximale flexibiliteit: daarom bied ik mijn diensten aan via <strong>freelance consultancy (B2B-contract)</strong> evenals via <strong>verschillende dienstverbanden</strong> (op afstand, hybride, voltijd of op projectbasis), afgestemd op de specifieke behoeften van uw organisatie.",
+                coverP3: "Mijn doel is om professioneel te blijven groeien samen met ambitieuze teams, door strategische visie, technische uitmuntendheid en positief leiderschap bij te dragen. Ik ga graag met u in gesprek om te bespreken hoe mijn ervaring waarde kan toevoegen aan uw toekomstige projecten.",
+                coverValediction: "Met vriendelijke groet,",
+                layers: [
+                    { h3: "Frontend & SEO Expert", items: ["React / Next.js / Vue.js / Angular", "Core Web Vitals & Technische SEO", "Prestatie-optimalisatie & SSR"] },
+                    { h3: "API & Business Logic", items: ["Node.js / Express Architectuur", "Cron Jobs & Webhooks", "Schaalbare RESTful Services"] },
+                    { h3: "Cloud & Infrastructure", items: ["Docker Containerisatie", "GCloud / AWS Beheer", "Geavanceerde CI/CD Pipelines"] },
+                    { h3: "Data & Intelligent Media", items: ["PostgreSQL / MongoDB", "Cloudinary (Asset Workflow)", "AI (HeyGen / PIPECAT)"] }
+                ],
+                experiences: [
+                    {
+                        company: "ACCENTURE", role: "Front-end Developer (Freelance Consultant)", date: "mrt. 2026 - aug. 2026 (6 mnd)",
+                        desc: "Geïntegreerd als freelance frontend-consultant in het ontwikkelteam van een groot analytisch platform binnen de verzekeringssector.",
+                        bullets: [
+                            "Ontwikkelen en onderhouden van UI-componenten met Vue.js en TypeScript voor complexe datavisualisatie en rapportbeheer.",
+                            "Oplossen van technische incidenten in applicatie-overstijgende stromen, met behoud van naadloze datasynchronisatie tussen UI-weergaven en exportmodules.",
+                            "Optimaliseren en verhelpen van bugs met betrekking tot strikte data-typering en numerieke opmaak in downloadbare rapporten.",
+                            "Actieve deelname aan Code Reviews, behandelen van technische vraagstukken in CI-omgevingen en waarborgen van codekwaliteit via testdekking."
+                        ],
+                        stack: { f: "Vue.js, TypeScript", l: "Data Sync, Export Modules", d: "CI/CD, Code Reviews, Testing" }
+                    },
+                    {
+                        company: "GFT (AI Avatar Project)", role: "Technical Lead (Freelance Consultant)", date: "mei 2024 - aug. 2025 (1 jr 3 mnd)",
+                        desc: "Technisch leiderschap als freelance consultant bij de ontwikkeling van een interactieve AI-avatar voor hoogwaardige beurzen.",
+                        bullets: [
+                            "Lage-latentie architectuur voor real-time respons met behulp van generatieve AI.",
+                            "Kwaliteitsborging via Unit Testing en CI/CD pipelines voor live-evenementen.",
+                            "Vertaling van complexe Figma-ontwerpen naar pixel-perfecte interfaces."
+                        ],
+                        stack: { f: "Next.js, React, Tailwind", l: "HeyGen, PIPECAT, Webhooks", d: "CI/CD, Code Reviews" }
+                    },
+                    {
+                        company: "Erescambio Marketing", role: "Technical Full Stack Lead", date: "okt. 2021 - Heden",
+                        desc: "Digitale transformatie en prestatie-optimalisatie voor marketingplatformen.",
+                        bullets: [
+                            "Implementatie van Headless CMS-architecturen met WordPress.",
+                            "Asset-optimalisatie via Cloudinary voor aanzienlijke verbetering van LCP en SEO.",
+                            "Zelfbeherende interfaces die operationele kosten verlagen."
+                        ],
+                        stack: { f: "React, Headless CMS", l: "Cloudinary, REST APIs", d: "Technische SEO, Web Vitals" }
+                    },
+                    {
+                        company: "JUBILAME", role: "Technical Lead & Angular Developer", date: "mei 2020 - jan. 2024",
+                        desc: "Technisch leiderschap bij Fintech-product gericht op automatisering en schaalbaarheid.",
+                        bullets: [
+                            "Automatisering van kritieke financiële processen via robuuste Cron Jobs.",
+                            "Beheer van schaalbare infrastructuur op Google Cloud met Docker.",
+                            "Opzetten van een kwaliteitscultuur met E2E-testing (Cypress)."
+                        ],
+                        stack: { f: "Angular, TypeScript", l: "Cron Jobs, PostgreSQL", d: "Docker, GCloud, Jira" }
+                    },
+                    {
+                        company: "SENIOR CONSULTING (Zelfstandige)", role: "Upfield, Amovens & Grote Klanten", date: "jan. 2016 - Heden",
+                        desc: "Schaalbare oplossingen voor complexe technische uitdagingen bij toonaangevende bedrijven.",
+                        bullets: [
+                            "Upfield: Wereldwijd logistiek dashboard met massale voorraadsynchronisatie (Cron Jobs).",
+                            "Amovens: React core-optimalisatie en stabilisatie via Jest-test-suites.",
+                            "SEO: Gespecialiseerde technische consultancy voor maximale organische weergave."
+                        ],
+                        stack: { f: "React, Node.js, Docker", l: "API Rate Limiting, Cron Jobs", d: "Jest, Unit Testing" }
+                    }
+                ],
+                education: [
+                    { title: "Bachelor in Software Engineering", school: "MasterD", date: "2008 - 2011" },
+                    { title: "Master in Full Stack Web Development", school: "MasterD", date: "2011 - 2013" },
+                    { title: "Hoger Technicus Multiplatform Dev (DAM)", school: "IES Nervión (Sevilla)", date: "2008 - 2010" },
+                    { title: "Officiële Certificering in React & Frontend Architectuur", school: "Gereguleerde Cursus", date: "2021" },
+                    { title: "Gereguleerde Certificering in SQL & Databasemanagement", school: "Geavanceerde Officiële Kwalificatie", date: "2019" },
+                    { title: "Officiële Specialisatie in Data Science & AI (Python / ML)", school: "Gereguleerde Professionele Cursus", date: "2023" },
+                    { title: "Officiële Certificering Cloud Infrastructuur & DevOps (AWS/Docker)", school: "Gereguleerde Kwalificatie", date: "2022" }
+                ]
+            },
+            de: {
+                printBtn: "📥 PDF herunterladen", mainTitle: "Senior Full Stack Lead & Frontend-Architekt", phoneLabel: "Telefon",
+                stackTitle: "Core Stack & Architektur", expTitle: "Berufserfahrung", eduTitle: "Ausbildung", englishLevelText: "🇬🇧 Englisch: C1 Advanced",
+                btnCoverLetter: "📄 Anschreiben", btnViewCV: "📋 Lebenslauf Anzeigen",
+                coverTagline: "💡 Leidenschaft für Technologie & Professionelle Vielseitigkeit",
+                coverGreeting: "Sehr geehrte(r) Personalverantwortliche(r) / Talent Team,",
+                coverP1: "Ich schreibe Ihnen mit der Begeisterung eines Entwicklers, der das Privileg hat, täglich in seinem Wunschberuf zu arbeiten: Software-Engineering und Full-Stack-Systemarchitektur. Mit über 12 Jahren Erfahrung in der Leitung und Entwicklung hochwirksamer digitaler Lösungen bleibt meine Hauptmotivation unverändert: das Schreiben von sauberem, skalierbarem Code und die Umwandlung komplexer Herausforderungen in herausragende Produkte.",
+                coverP2: "Im Laufe meiner Karriere habe ich Frontend- und Backend-Systeme entwickelt (React, Next.js, Vue.js, Angular, Node.js) und Cloud-Infrastrukturen verwaltet (GCloud, AWS, Docker). Ich verstehe technische Zusammenarbeit mit höchster Flexibilität: Daher biete ich meine Leistungen sowohl im Rahmen von <strong>Freelance-Consulting (B2B-Vertrag)</strong> als auch über <strong>verschiedene Anstellungsverhältnisse</strong> (Remote, Hybrid, Vollzeit oder Projektbasis) an, genau angepasst an die Bedürfnisse Ihrer Organisation.",
+                coverP3: "Mein Ziel ist es, mich gemeinsam mit ehrgeizigen Teams weiterzuentwickeln und strategische Vision, technische Exzellenz und positive Führung einzubringen. Ich freue mich auf ein Gespräch, um zu erörtern, wie meine Erfahrung zum Erfolg Ihrer nächsten Initiativen beitragen kann.",
+                coverValediction: "Mit freundlichen Grüßen,",
+                layers: [
+                    { h3: "Frontend & SEO Expert", items: ["React / Next.js / Vue.js / Angular", "Core Web Vitals & Technisches SEO", "Leistungsoptimierung & SSR"] },
+                    { h3: "API & Business Logic", items: ["Node.js / Express Architektur", "Cron-Jobs & Webhooks", "Skalierbare RESTful-Dienste"] },
+                    { h3: "Cloud & Infrastructure", items: ["Docker Containerisierung", "GCloud / AWS Verwaltung", "Fortgeschrittene CI/CD-Pipelines"] },
+                    { h3: "Data & Intelligent Media", items: ["PostgreSQL / MongoDB", "Cloudinary (Asset Workflow)", "KI (HeyGen / PIPECAT)"] }
+                ],
+                experiences: [
+                    {
+                        company: "ACCENTURE", role: "Front-end Entwickler (Freelance-Berater)", date: "März 2026 – Aug. 2026 (6 Mon.)",
+                        desc: "Als freiberuflicher Frontend-Berater im Entwicklungsteam einer großen Analyseplattform in der Versicherungsbranche integriert.",
+                        bullets: [
+                            "Entwicklung und Pflege von Benutzeroberflächenkomponenten mit Vue.js und TypeScript für komplexe Datenvisualisierung und Berichtsverwaltung.",
+                            "Behebung technischer Vorfälle in anwendungsübergreifenden Abläufen zur Gewährleistung nahtloser Datensynchronisation zwischen UI und Exportmodulen.",
+                            "Optimierung und Behebung von Fehlern bezüglich strikter Datentypisierung und numerischer Formatierung in herunterladbaren Berichten.",
+                            "Aktive Teilnahme an Code-Reviews, Behebung technischer Probleme in CI-Umgebungen und Sicherstellung der Codequalität durch Testabdeckung."
+                        ],
+                        stack: { f: "Vue.js, TypeScript", l: "Data Sync, Export Modules", d: "CI/CD, Code Reviews, Testing" }
+                    },
+                    {
+                        company: "GFT (KI-Avatar-Projekt)", role: "Technical Lead (Freelance-Berater)", date: "Mai 2024 – Aug. 2025 (1 J. 3 Mon.)",
+                        desc: "Technische Leitung als freiberuflicher Berater bei der Entwicklung eines interaktiven KI-Avatars für hochrangige Messen.",
+                        bullets: [
+                            "Low-Latency-Architektur für Echtzeitantworten mittels generativer KI.",
+                            "Qualitätssicherung durch Unittests und CI/CD-Pipelines für Live-Events.",
+                            "Umsetzung komplexer Figma-Designs in pixelgenaue Benutzeroberflächen."
+                        ],
+                        stack: { f: "Next.js, React, Tailwind", l: "HeyGen, PIPECAT, Webhooks", d: "CI/CD, Code Reviews" }
+                    },
+                    {
+                        company: "Erescambio Marketing", role: "Technical Full Stack Lead", date: "Okt. 2021 – Heute",
+                        desc: "Digitale Transformation und Leistungsoptimierung für Marketingplattformen.",
+                        bullets: [
+                            "Implementierung von Headless-CMS-Architekturen mit WordPress.",
+                            "Asset-Optimierung über Cloudinary zur deutlichen Verbesserung von LCP und SEO.",
+                            "Selbstverwaltete Benutzeroberflächen zur Senkung der Betriebskosten."
+                        ],
+                        stack: { f: "React, Headless CMS", l: "Cloudinary, REST APIs", d: "Technisches SEO, Web Vitals" }
+                    },
+                    {
+                        company: "JUBILAME", role: "Technical Lead & Angular Developer", date: "Mai 2020 – Jan. 2024",
+                        desc: "Technische Leitung eines Fintech-Produkts mit Fokus auf Automatisierung und Skalierbarkeit.",
+                        bullets: [
+                            "Automatisierung kritischer Finanzprozesse über robuste Cron-Jobs.",
+                            "Verwaltung skalierbarer Infrastruktur auf Google Cloud mittels Docker.",
+                            "Etablierung einer Qualitätskultur mit E2E-Testing (Cypress)."
+                        ],
+                        stack: { f: "Angular, TypeScript", l: "Cron-Jobs, PostgreSQL", d: "Docker, GCloud, Jira" }
+                    },
+                    {
+                        company: "SENIOR CONSULTING (Freiberuflich)", role: "Upfield, Amovens & Großkunden", date: "Jan. 2016 – Heute",
+                        desc: "Skalierbare Lösungen für komplexe technische Herausforderungen bei führenden Unternehmen.",
+                        bullets: [
+                            "Upfield: Globales Logistik-Dashboard mit massiver Inventarsynchronisierung (Cron-Jobs).",
+                            "Amovens: React-Core-Optimierung und Stabilisierung durch Jest-Test-Suites.",
+                            "SEO: Spezialisierte technische Beratung zur Maximierung des organischen Traffics."
+                        ],
+                        stack: { f: "React, Node.js, Docker", l: "API Rate Limiting, Cron-Jobs", d: "Jest, Unit Testing" }
+                    }
+                ],
+                education: [
+                    { title: "Bachelor in Software Engineering", school: "MasterD", date: "2008 - 2011" },
+                    { title: "Master in Full Stack Webentwicklung", school: "MasterD", date: "2011 - 2013" },
+                    { title: "Staatlich geprüfter Informatiker Anwendungsentwicklung (DAM)", school: "IES Nervión (Sevilla)", date: "2008 - 2010" },
+                    { title: "Offizielle Zertifizierung in React & Frontend-Architektur", school: "Geregelter Kurs", date: "2021" },
+                    { title: "Geregelte Zertifizierung in SQL & Datenbankverwaltung", school: "Offizielle Fortgeschrittene Qualifikation", date: "2019" },
+                    { title: "Offizielle Spezialisierung in Data Science & KI (Python / ML)", school: "Geregelter Professioneller Kurs", date: "2023" },
+                    { title: "Offizielle Zertifizierung Cloud-Infrastruktur & DevOps (AWS/Docker)", school: "Geregelte Qualifikation", date: "2022" }
+                ]
+            }
+        };
+
+        let currentLang = 'es';
+        let currentView = 'cv';
+
+        function toggleDocView() {
+            currentView = currentView === 'cv' ? 'cover' : 'cv';
+            render();
+        }
+
+        function changeLanguage(lang) {
+            currentLang = lang;
+            render();
+        }
+
+        function render() {
+            const t = translations[currentLang];
+            document.getElementById('langSelect').value = currentLang;
+            document.getElementById('printBtn').innerText = t.printBtn;
+            document.getElementById('mainTitle').innerText = t.mainTitle;
+            document.getElementById('stackTitle').innerText = t.stackTitle;
+            document.getElementById('expTitle').innerText = t.expTitle;
+            document.getElementById('eduTitle').innerText = t.eduTitle;
+
+            // View toggle button
+            document.getElementById('docViewBtn').innerText = currentView === 'cv' ? t.btnCoverLetter : t.btnViewCV;
+
+            if (currentView === 'cv') {
+                document.getElementById('cvView').style.display = 'block';
+                document.getElementById('coverView').style.display = 'none';
+            } else {
+                document.getElementById('cvView').style.display = 'none';
+                document.getElementById('coverView').style.display = 'block';
+            }
+
+            // Cover Letter dynamic content
+            document.getElementById('coverTagline').innerHTML = t.coverTagline;
+            document.getElementById('coverGreeting').innerHTML = t.coverGreeting;
+            document.getElementById('coverP1').innerHTML = t.coverP1;
+            document.getElementById('coverP2').innerHTML = t.coverP2;
+            document.getElementById('coverP3').innerHTML = t.coverP3;
+            document.getElementById('coverValediction').innerHTML = t.coverValediction;
+
+            const engLevelEl = document.getElementById('englishLevel');
+            if (t.englishLevelText) {
+                engLevelEl.innerText = t.englishLevelText;
+                engLevelEl.style.display = 'inline-block';
+            } else {
+                engLevelEl.style.display = 'none';
+            }
+
+            document.getElementById('gridLayers').innerHTML = t.layers.map(function(l) {
+                return '<div class="layer-card"><h3>' + l.h3 + '</h3><ul>' + l.items.map(function(i) { return '<li>' + i + '</li>'; }).join('') + '</ul></div>';
+            }).join('');
+
+            document.getElementById('experienceContainer').innerHTML = t.experiences.map(function(e) {
+                return '<div class="experience-card">' +
+                    '<div class="exp-header"><div><span class="exp-company">' + e.company + '</span><span class="exp-role">' + e.role + '</span></div><span class="exp-date">' + e.date + '</span></div>' +
+                    '<div class="exp-details">' +
+                        '<div class="exp-main">' + e.desc + '<ul>' + e.bullets.map(function(b) { return '<li>' + b + '</li>'; }).join('') + '</ul></div>' +
+                        '<div class="exp-stack-box">' +
+                            '<b>Frontend:</b> ' + e.stack.f +
+                            '<b>Logic/IA:</b> ' + e.stack.l +
+                            '<b>QA/DevOps:</b> ' + e.stack.d +
+                        '</div>' +
+                    '</div>' +
+                '</div>';
+            }).join('');
+
+            document.getElementById('eduContainer').innerHTML = t.education.map(function(ed) {
+                return '<div class="edu-card"><strong>' + ed.title + '</strong><span>' + ed.school + ' | ' + ed.date + '</span></div>';
+            }).join('');
+        }
+        render();
+    </script>
+</body>
+</html>

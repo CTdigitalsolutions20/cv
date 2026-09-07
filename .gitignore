@@ -1,0 +1,22 @@
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+
+# next.js
+/.next/
+/out/
+
+# cloned temporary directory
+/repo_mi_portfolio
+
+# local env files
+.env*.local
+.env.local
+.DS_Store
+
+# vercel
+.vercel
+
+# typescript build
+*.tsbuildinfo

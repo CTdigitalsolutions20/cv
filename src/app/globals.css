@@ -1,0 +1,82 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    font-family: 'Inter', sans-serif;
+  }
+
+  body {
+    @apply bg-slate-950 text-slate-100 antialiased selection:bg-blue-500 selection:text-white;
+  }
+}
+
+/* Custom Glassmorphism Effects */
+.glass-panel {
+  background: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.glass-card {
+  background: rgba(30, 41, 59, 0.5);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-card:hover {
+  border-color: rgba(59, 130, 246, 0.4);
+  box-shadow: 0 10px 30px -10px rgba(37, 99, 235, 0.25);
+}
+
+/* Gradient Mesh Text Glow */
+.text-gradient {
+  background: linear-gradient(135deg, #60a5fa 0%, #a855f7 50%, #3b82f6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #090d16;
+}
+::-webkit-scrollbar-thumb {
+  background: #1e293b;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #3b82f6;
+}
+
+/* Print Optimization */
+@media print {
+  body {
+    background: white !important;
+    color: #0f172a !important;
+  }
+  .no-print {
+    display: none !important;
+  }
+  .glass-panel, .glass-card {
+    background: white !important;
+    backdrop-filter: none !important;
+    border: 1px solid #cbd5e1 !important;
+    box-shadow: none !important;
+    color: #0f172a !important;
+  }
+  .text-gradient {
+    background: none !important;
+    -webkit-text-fill-color: #2563eb !important;
+    color: #2563eb !important;
+  }
+  .print-page-break {
+    page-break-before: always;
+  }
+}
