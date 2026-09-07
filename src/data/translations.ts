@@ -107,7 +107,7 @@ export const translations: Record<Language, Translation> = {
       {
         company: "ACCENTURE",
         role: "Desarrollador Front-end (Consultoría Freelance)",
-        date: "mar. 2026 - ago. 2026 (6 meses)",
+        date: "ago. 2025 - ago. 2026 (1 año)",
         desc: "Consultor frontend freelance integrado en el equipo de desarrollo para una gran plataforma analítica en el sector asegurador.",
         bullets: [
           "Desarrollo y mantenimiento de componentes de interfaz de usuario con Vue.js y TypeScript para visualización de datos complejos y gestión de informes.",
@@ -287,7 +287,7 @@ export const translations: Record<Language, Translation> = {
       {
         company: "ACCENTURE",
         role: "Front-end Developer (Freelance Consultant)",
-        date: "Mar. 2026 - Aug. 2026 (6 mos)",
+        date: "Aug. 2025 - Aug. 2026 (1 yr)",
         desc: "Integrated as a freelance frontend consultant into the development team for a major analytical platform within the insurance sector.",
         bullets: [
           "Developed and maintained user interface components using Vue.js and TypeScript for complex data visualization and report management.",
@@ -467,7 +467,7 @@ export const translations: Record<Language, Translation> = {
       {
         company: "ACCENTURE",
         role: "Développeur Front-end (Consulting Freelance)",
-        date: "mars 2026 - août 2026 (6 mois)",
+        date: "août 2025 - août 2026 (1 an)",
         desc: "Consultant frontend freelance intégré à l'équipe de développement pour une grande plateforme analytique dans le secteur de l'assurance.",
         bullets: [
           "Développement et maintenance de composants d'interface utilisateur avec Vue.js et TypeScript pour la visualisation de données complexes et la gestion de rapports.",
@@ -647,7 +647,7 @@ export const translations: Record<Language, Translation> = {
       {
         company: "ACCENTURE",
         role: "Desenvolvedor Front-end (Consultoria Freelance)",
-        date: "mar. 2026 - ago. 2026 (6 meses)",
+        date: "ago. 2025 - ago. 2026 (1 ano)",
         desc: "Consultor frontend freelance integrado à equipe de desenvolvimento para uma grande plataforma analítica no setor de seguros.",
         bullets: [
           "Desenvolvimento e manutenção de componentes de interface de usuário com Vue.js e TypeScript para visualização de dados complexos e gestão de relatórios.",
@@ -827,7 +827,7 @@ export const translations: Record<Language, Translation> = {
       {
         company: "ACCENTURE",
         role: "Front-end Developer (Freelance Consultant)",
-        date: "mrt. 2026 - aug. 2026 (6 mnd)",
+        date: "aug. 2025 - aug. 2026 (1 jaar)",
         desc: "Geïntegreerd als freelance frontend-consultant in het ontwikkelteam van een groot analytisch platform binnen de verzekeringssector.",
         bullets: [
           "Ontwikkelen en onderhouden van UI-componenten met Vue.js en TypeScript voor complexe datavisualisatie en rapportbeheer.",
@@ -1007,7 +1007,7 @@ export const translations: Record<Language, Translation> = {
       {
         company: "ACCENTURE",
         role: "Front-end Entwickler (Freelance-Berater)",
-        date: "März 2026 – Aug. 2026 (6 Mon.)",
+        date: "Aug. 2025 – Aug. 2026 (1 Jahr)",
         desc: "Als freiberuflicher Frontend-Berater im Entwicklungsteam einer großen Analyseplattform in der Versicherungsbranche integriert.",
         bullets: [
           "Entwicklung und Pflege von Benutzeroberflächenkomponenten mit Vue.js und TypeScript für komplexe Datenvisualisierung und Berichtsverwaltung.",
