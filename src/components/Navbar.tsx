@@ -3,7 +3,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Language, LANGUAGES } from '@/data/translations';
 import { useLanguage } from '@/context/LanguageContext';
-import { Download, Menu, X, Briefcase, GraduationCap, FileText, Cpu, Mail, Calendar, ChevronDown, Check, Globe } from 'lucide-react';
+import { Download, Menu, X, Briefcase, GraduationCap, FileText, Cpu, Mail, Calendar, ChevronDown, Check, Globe, Sparkles } from 'lucide-react';
 
 interface NavbarProps {
   activeSection?: string;
@@ -30,6 +30,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   }, []);
 
   const navItems = [
+    { id: 'timelapse', href: '#timelapse', label: t.nav.timelapse || 'Timelapse', icon: Sparkles },
     { id: 'experience', href: '#experience', label: t.nav.experience, icon: Briefcase },
     { id: 'education', href: '#education', label: t.nav.education, icon: GraduationCap },
     { id: 'cover', href: '#cover', label: t.nav.coverLetter, icon: FileText },

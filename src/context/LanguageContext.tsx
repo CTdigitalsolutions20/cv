@@ -14,7 +14,7 @@ interface LanguageContextType {
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
 export const LanguageProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [currentLang, setCurrentLang] = useState<Language>('es');
+  const [currentLang, setCurrentLang] = useState<Language>('en');
 
   // Hydrate preferred language from localStorage
   useEffect(() => {
@@ -38,8 +38,8 @@ export const LanguageProvider: React.FC<{ children: ReactNode }> = ({ children }
     }
   };
 
-  const t = translations[currentLang] || translations['es'];
-  const currentLangObj = LANGUAGES.find((l) => l.code === currentLang) || LANGUAGES[0];
+  const t = translations[currentLang] || translations['en'];
+  const currentLangObj = LANGUAGES.find((l) => l.code === currentLang) || LANGUAGES.find((l) => l.code === 'en') || LANGUAGES[0];
 
   return (
     <LanguageContext.Provider

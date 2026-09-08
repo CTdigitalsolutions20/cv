@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { Navbar } from '@/components/Navbar';
 import { HeaderHero } from '@/components/HeaderHero';
+import { TimelapseSection } from '@/components/TimelapseSection';
 import { ExperienceSection } from '@/components/ExperienceSection';
 import { EducationSection } from '@/components/EducationSection';
 import { CoverLetterSection } from '@/components/CoverLetterSection';
@@ -38,6 +39,7 @@ export default function Home() {
       {/* Main Content Sections */}
       <main className="flex-1 space-y-8 pb-16">
         <HeaderHero onNavigate={scrollToSection} />
+        <TimelapseSection />
         <ExperienceSection />
         <EducationSection />
         <CoverLetterSection />

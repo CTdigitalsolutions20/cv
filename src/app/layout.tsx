@@ -19,7 +19,7 @@ export const metadata: Metadata = {
         alt: "Alberto Ledesma Ollega"
       }
     ],
-    locale: "es_ES",
+    locale: "en_US",
     type: "website",
   }
 };
@@ -30,7 +30,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es" className="scroll-smooth">
+    <html lang="en" className="scroll-smooth">
       <body className="bg-slate-950 text-slate-100 min-h-screen flex flex-col font-sans">
         <LanguageProvider>
           {children}

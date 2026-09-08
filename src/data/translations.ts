@@ -44,12 +44,24 @@ export interface Translation {
   nav: {
     experience: string;
     education: string;
+    timelapse?: string;
     coverLetter: string;
     stack: string;
     contact: string;
     downloadPdf: string;
     bookMeeting?: string;
   };
+  timelapseBadge?: string;
+  timelapseTitle?: string;
+  timelapseSubtitle?: string;
+  timelapseFilterAll?: string;
+  timelapseFilterWork?: string;
+  timelapseFilterEdu?: string;
+  timelapseFilterHighlight?: string;
+  timelapsePlayBtn?: string;
+  timelapsePauseBtn?: string;
+  timelapseResetBtn?: string;
+  timelapseSearchPlaceholder?: string;
   hero: {
     subtitle: string;
     title: string;
@@ -117,12 +129,24 @@ export const translations: Record<Language, Translation> = {
     nav: {
       experience: "Experiencia",
       education: "Estudios",
+      timelapse: "Timelapse",
       coverLetter: "Cover Letter",
       stack: "Stack Completo",
       contact: "Contacto",
       downloadPdf: "📥 Descargar PDF",
       bookMeeting: "Agendar Reunión"
     },
+    timelapseBadge: "Rama Cronológica 2008 - 2026",
+    timelapseTitle: "Timelapse de Vida & Carreer Branch",
+    timelapseSubtitle: "Visualización interactiva y cronológica de toda mi trayectoria estudiantil y profesional",
+    timelapseFilterAll: "Todos los Hitos",
+    timelapseFilterWork: "💼 Experiencia Laboral",
+    timelapseFilterEdu: "🎓 Estudios & Titulaciones",
+    timelapseFilterHighlight: "⭐ Destacados",
+    timelapsePlayBtn: "▶ Reproducir Timelapse",
+    timelapsePauseBtn: "⏸ Pausar",
+    timelapseResetBtn: "↺ Reiniciar",
+    timelapseSearchPlaceholder: "Buscar hito o tecnología (ej. Accenture, React, DAM, Master...)",
     hero: {
       subtitle: "Senior Full Stack Lead & Frontend Architect",
       title: "Alberto Ledesma Ollega",
@@ -327,12 +351,24 @@ export const translations: Record<Language, Translation> = {
     nav: {
       experience: "Experience",
       education: "Education",
+      timelapse: "Timelapse",
       coverLetter: "Cover Letter",
       stack: "Full Stack",
       contact: "Contact",
       downloadPdf: "📥 Download PDF",
       bookMeeting: "Book a Meeting"
     },
+    timelapseBadge: "Chronological Branch 2008 - 2026",
+    timelapseTitle: "Life & Career Interactive Timelapse",
+    timelapseSubtitle: "An interactive, unified timeline branch of my academic journey and professional experience",
+    timelapseFilterAll: "All Milestones",
+    timelapseFilterWork: "💼 Work Experience",
+    timelapseFilterEdu: "🎓 Education & Degrees",
+    timelapseFilterHighlight: "⭐ Highlights",
+    timelapsePlayBtn: "▶ Play Timelapse",
+    timelapsePauseBtn: "⏸ Pause",
+    timelapseResetBtn: "↺ Reset",
+    timelapseSearchPlaceholder: "Search milestone or stack (e.g., Accenture, React, DAM...)",
     hero: {
       subtitle: "Senior Full Stack Lead & Frontend Architect",
       title: "Alberto Ledesma Ollega",
@@ -537,12 +573,24 @@ export const translations: Record<Language, Translation> = {
     nav: {
       experience: "Expérience",
       education: "Études",
+      timelapse: "Timelapse",
       coverLetter: "Cover Letter",
       stack: "Stack Complet",
       contact: "Contact",
       downloadPdf: "📥 Télécharger le PDF",
       bookMeeting: "Réserver un RDV"
     },
+    timelapseBadge: "Branche Chronologique 2008 - 2026",
+    timelapseTitle: "Timelapse de Parcours et de Carrière",
+    timelapseSubtitle: "Arborescence interactive et unifiée de mon parcours académique et professionnel",
+    timelapseFilterAll: "Tous les Jalons",
+    timelapseFilterWork: "💼 Expérience Pro",
+    timelapseFilterEdu: "🎓 Études & Diplômes",
+    timelapseFilterHighlight: "⭐ Incontournables",
+    timelapsePlayBtn: "▶ Lancer le Timelapse",
+    timelapsePauseBtn: "⏸ Pause",
+    timelapseResetBtn: "↺ Réinitialiser",
+    timelapseSearchPlaceholder: "Rechercher par technologie ou entreprise...",
     hero: {
       subtitle: "Senior Full Stack Lead & Architecte Frontend",
       title: "Alberto Ledesma Ollega",
@@ -745,12 +793,24 @@ export const translations: Record<Language, Translation> = {
     nav: {
       experience: "Experiência",
       education: "Estudos",
+      timelapse: "Timelapse",
       coverLetter: "Cover Letter",
       stack: "Stack Completo",
       contact: "Contato",
       downloadPdf: "📥 Baixar PDF",
       bookMeeting: "Agendar Reunião"
     },
+    timelapseBadge: "Ramificação Cronológica 2008 - 2026",
+    timelapseTitle: "Timelapse Interativo de Vida e Carreira",
+    timelapseSubtitle: "Visualização unificada e interativa de toda a minha trajetória acadêmica e profissional",
+    timelapseFilterAll: "Todos os Marcos",
+    timelapseFilterWork: "💼 Experiência Profissional",
+    timelapseFilterEdu: "🎓 Estudos & Qualificações",
+    timelapseFilterHighlight: "⭐ Destaques",
+    timelapsePlayBtn: "▶ Reproduzir Timelapse",
+    timelapsePauseBtn: "⏸ Pausar",
+    timelapseResetBtn: "↺ Reiniciar",
+    timelapseSearchPlaceholder: "Pesquisar por marco ou tecnologia...",
     hero: {
       subtitle: "Senior Full Stack Lead & Arquiteto Frontend",
       title: "Alberto Ledesma Ollega",
@@ -955,12 +1015,24 @@ export const translations: Record<Language, Translation> = {
     nav: {
       experience: "Ervaring",
       education: "Opleiding",
+      timelapse: "Timelapse",
       coverLetter: "Cover Letter",
       stack: "Full Stack",
       contact: "Contact",
       downloadPdf: "📥 PDF downloaden",
       bookMeeting: "Afspraak Inplannen"
     },
+    timelapseBadge: "Chronologische Tak 2008 - 2026",
+    timelapseTitle: "Interactieve Levens- en Carrière-Timelapse",
+    timelapseSubtitle: "Visueel interactieve tijdlijn van mijn academische en professionele traject",
+    timelapseFilterAll: "Alle Mijlpalen",
+    timelapseFilterWork: "💼 Werkervaring",
+    timelapseFilterEdu: "🎓 Opleidingen & Diploma's",
+    timelapseFilterHighlight: "⭐ Hoogtepunten",
+    timelapsePlayBtn: "▶ Speel Timelapse Af",
+    timelapsePauseBtn: "⏸ Pauze",
+    timelapseResetBtn: "↺ Reset",
+    timelapseSearchPlaceholder: "Zoek op mijlpaal of technologie...",
     hero: {
       subtitle: "Senior Full Stack Lead & Frontend Architect",
       title: "Alberto Ledesma Ollega",
@@ -1165,12 +1237,24 @@ export const translations: Record<Language, Translation> = {
     nav: {
       experience: "Erfahrung",
       education: "Ausbildung",
+      timelapse: "Timelapse",
       coverLetter: "Cover Letter",
       stack: "Full Stack",
       contact: "Kontakt",
       downloadPdf: "📥 PDF herunterladen",
       bookMeeting: "Termin Vereinbaren"
     },
+    timelapseBadge: "Chronologischer Zweig 2008 - 2026",
+    timelapseTitle: "Interaktiver Lebens- und Karriere-Timelapse",
+    timelapseSubtitle: "Eine interaktive, vereinheitlichte Zeitleiste meiner akademischen und beruflichen Laufbahn",
+    timelapseFilterAll: "Alle Meilensteine",
+    timelapseFilterWork: "💼 Berufserfahrung",
+    timelapseFilterEdu: "🎓 Studium & Zertifikate",
+    timelapseFilterHighlight: "⭐ Highlights",
+    timelapsePlayBtn: "▶ Timelapse Abspielen",
+    timelapsePauseBtn: "⏸ Pause",
+    timelapseResetBtn: "↺ Zurücksetzen",
+    timelapseSearchPlaceholder: "Nach Meilenstein oder Technologie suchen...",
     hero: {
       subtitle: "Senior Full Stack Lead & Frontend-Architekt",
       title: "Alberto Ledesma Ollega",
