@@ -1,5 +1,22 @@
 export type Language = 'es' | 'en' | 'fr' | 'pt' | 'nl' | 'de';
 
+export interface LanguageOption {
+  code: Language;
+  label: string;
+  name: string;
+  flag: string;
+}
+
+export const LANGUAGES: LanguageOption[] = [
+  { code: 'es', label: 'ES', name: 'Español', flag: '🇪🇸' },
+  { code: 'en', label: 'EN', name: 'English', flag: '🇬🇧' },
+  { code: 'fr', label: 'FR', name: 'Français', flag: '🇫🇷' },
+  { code: 'pt', label: 'PT', name: 'Português', flag: '🇵🇹' },
+  { code: 'nl', label: 'NL', name: 'Nederlands', flag: '🇳🇱' },
+  { code: 'de', label: 'DE', name: 'Deutsch', flag: '🇩🇪' },
+];
+
+
 export interface Experience {
   company: string;
   role: string;
@@ -31,6 +48,7 @@ export interface Translation {
     stack: string;
     contact: string;
     downloadPdf: string;
+    bookMeeting?: string;
   };
   hero: {
     subtitle: string;
@@ -39,11 +57,26 @@ export interface Translation {
     status: string;
     contactBtn: string;
     viewCoverBtn: string;
+    bookMeetingBtn?: string;
+    metricYears: string;
+    metricConsulting: string;
+    metricStack: string;
+    metricLanguages: string;
   };
+  expBadge: string;
   expTitle: string;
   expSubtitle: string;
+  expHighlight: string;
+  expStackTitle: string;
+  expStackFeatured: string;
+  eduBadge: string;
   eduTitle: string;
   eduSubtitle: string;
+  eduDegreeLabel: string;
+  eduMasterLabel: string;
+  eduCertLabel: string;
+  eduVerified: string;
+  coverBadge: string;
   coverTitle: string;
   coverSubtitle: string;
   coverTagline: string;
@@ -52,14 +85,28 @@ export interface Translation {
   coverP2: string;
   coverP3: string;
   coverValediction: string;
+  copyText: string;
+  copiedText: string;
+  printPdf: string;
+  stackBadge: string;
   stackTitle: string;
   stackSubtitle: string;
+  stackSearchPlaceholder: string;
+  stackClear: string;
+  contactBadge: string;
   contactTitle: string;
   contactSubtitle: string;
   emailLabel: string;
   phoneLabel: string;
   linkedinLabel: string;
   portfolioLabel: string;
+  bookMeetingLabel?: string;
+  bookMeetingSub?: string;
+  bookMeeting?: string;
+  copyEmail: string;
+  callPhone: string;
+  openProfile: string;
+  footerBuiltWith: string;
   experiences: Experience[];
   education: EducationItem[];
   stackCategories: StackCategory[];
@@ -73,7 +120,8 @@ export const translations: Record<Language, Translation> = {
       coverLetter: "Cover Letter",
       stack: "Stack Completo",
       contact: "Contacto",
-      downloadPdf: "📥 Descargar PDF"
+      downloadPdf: "📥 Descargar PDF",
+      bookMeeting: "Agendar Reunión"
     },
     hero: {
       subtitle: "Senior Full Stack Lead & Frontend Architect",
@@ -81,12 +129,27 @@ export const translations: Record<Language, Translation> = {
       bio: "+12 años de experiencia liderando equipos técnicos, diseñando arquitecturas digitales escalables y transformando retos de negocio complejos en software de alto impacto.",
       status: "🟢 Disponible para proyectos Freelance & Contratación",
       contactBtn: "💬 Contactar",
-      viewCoverBtn: "✉️ Ver Cover Letter"
+      viewCoverBtn: "✉️ Ver Cover Letter",
+      bookMeetingBtn: "📅 Agendar Reunión",
+      metricYears: "Años de Experiencia",
+      metricConsulting: "Consultoría & Empresa",
+      metricStack: "Frontend & Backend",
+      metricLanguages: "Soporte Multilingüe"
     },
+    expBadge: "Trayectoria Profesional",
     expTitle: "Experiencia Profesional",
     expSubtitle: "Trayectoria de liderazgo y desarrollo técnico en proyectos de alto nivel",
+    expHighlight: "Consultoría Freelance",
+    expStackTitle: "Arquitectura Frontend & Stack",
+    expStackFeatured: "Stack Destacado:",
+    eduBadge: "Académico & Certificaciones",
     eduTitle: "Historial Académico & Certificaciones",
     eduSubtitle: "Formación universitaria, másteres y titulaciones oficiales reguladas",
+    eduDegreeLabel: "Titulación Universitaria / Grado",
+    eduMasterLabel: "Máster de Especialización",
+    eduCertLabel: "Certificación Regulada / Oficial",
+    eduVerified: "Titulación verificada y homologada",
+    coverBadge: "Carta Profesional",
     coverTitle: "Carta de Presentación",
     coverSubtitle: "Propuesta de valor, vocación y flexibilidad de colaboración",
     coverTagline: "💡 Pasión por la Tecnología & Versatilidad Profesional",
@@ -95,14 +158,28 @@ export const translations: Record<Language, Translation> = {
     coverP2: "A lo largo de mi trayectoria he diseñado sistemas frontend y backend (React, Next.js, Vue.js, Angular, Node.js) y gestionado entornos cloud (GCloud, AWS, Docker). Entiendo la colaboración técnica desde la máxima flexibilidad: por ello, ofrezco mis servicios tanto en modalidad de <strong>consultoría freelance (contrato mercantil / B2B)</strong> como a través de <strong>diferentes tipos de contratación laboral</strong> (remoto, híbrido, jornada completa o por proyectos), adaptándome a las necesidades reales de su organización.",
     coverP3: "Mi objetivo es continuar evolucionando profesionalmente junto a equipos ambiciosos, aportando visión técnica estratégica, solidez y un liderazgo positivo. Estaré encantado de mantener una conversación para profundizar en cómo puedo contribuir al éxito de sus próximos proyectos.",
     coverValediction: "Atentamente,\nAlberto Ledesma Ollega",
+    copyText: "Copiar Texto",
+    copiedText: "¡Copiado!",
+    printPdf: "Imprimir PDF",
+    stackBadge: "Stack Tecnológico (+12 Años)",
     stackTitle: "Stack Técnico & Herramientas de Carrera",
     stackSubtitle: "Desglose exhaustivo de tecnologías y metodologías dominadas a lo largo de +12 años",
+    stackSearchPlaceholder: "Buscar herramienta (ej: React, Python, SQL, Docker...)",
+    stackClear: "Limpiar",
+    contactBadge: "Canales Directos",
     contactTitle: "Contacto & Vinculación",
     contactSubtitle: "Canales directos para iniciar colaboraciones freelance o contrataciones",
     emailLabel: "Correo Electrónico",
     phoneLabel: "Teléfono Directo",
     linkedinLabel: "Perfil Profesional LinkedIn",
     portfolioLabel: "Portfolio Web",
+    bookMeetingLabel: "Agendar Reunión 1-to-1",
+    bookMeetingSub: "Selecciona día y hora en mi Google Calendar",
+    bookMeeting: "Agendar Reunión",
+    copyEmail: "Copiar Correo",
+    callPhone: "Llamar",
+    openProfile: "Abrir Perfil",
+    footerBuiltWith: "Desarrollado con",
     experiences: [
       {
         company: "ACCENTURE",
@@ -253,7 +330,8 @@ export const translations: Record<Language, Translation> = {
       coverLetter: "Cover Letter",
       stack: "Full Stack",
       contact: "Contact",
-      downloadPdf: "📥 Download PDF"
+      downloadPdf: "📥 Download PDF",
+      bookMeeting: "Book a Meeting"
     },
     hero: {
       subtitle: "Senior Full Stack Lead & Frontend Architect",
@@ -261,12 +339,27 @@ export const translations: Record<Language, Translation> = {
       bio: "+12 years of experience leading technical teams, architecting scalable digital solutions, and transforming complex business challenges into high-impact software.",
       status: "🟢 Available for Freelance & Contract Roles",
       contactBtn: "💬 Get in Touch",
-      viewCoverBtn: "✉️ View Cover Letter"
+      viewCoverBtn: "✉️ View Cover Letter",
+      bookMeetingBtn: "📅 Schedule a Call",
+      metricYears: "Years of Experience",
+      metricConsulting: "Consulting & Enterprise",
+      metricStack: "Frontend & Backend",
+      metricLanguages: "Multilingual Support"
     },
+    expBadge: "Career Journey",
     expTitle: "Professional Experience",
     expSubtitle: "Track record of technical leadership and development in enterprise projects",
+    expHighlight: "Freelance Consulting",
+    expStackTitle: "Frontend Architecture & Stack",
+    expStackFeatured: "Featured Stack:",
+    eduBadge: "Academic & Certifications",
     eduTitle: "Academic History & Certifications",
     eduSubtitle: "University degree, master's degrees, and official regulated qualifications",
+    eduDegreeLabel: "University Degree",
+    eduMasterLabel: "Master's Degree",
+    eduCertLabel: "Official / Regulated Certification",
+    eduVerified: "Verified & Accredited Qualification",
+    coverBadge: "Professional Letter",
     coverTitle: "Cover Letter",
     coverSubtitle: "Value proposition, vocation, and flexible collaboration options",
     coverTagline: "💡 Passion for Technology & Professional Versatility",
@@ -275,14 +368,28 @@ export const translations: Record<Language, Translation> = {
     coverP2: "Throughout my career, I have architected frontend and backend systems (React, Next.js, Vue.js, Angular, Node.js) and managed cloud infrastructure (GCloud, AWS, Docker). I approach technical collaboration with ultimate flexibility: therefore, I offer my services both via <strong>freelance consulting (B2B contract)</strong> and through <strong>various employment contract models</strong> (remote, hybrid, full-time, or project-based), tailoring my engagement to your organization's specific goals.",
     coverP3: "My objective is to continue growing professionally alongside ambitious teams, contributing strategic vision, technical excellence, and positive leadership. I would welcome the opportunity to discuss how my background and expertise can drive success for your upcoming initiatives.",
     coverValediction: "Best regards,\nAlberto Ledesma Ollega",
+    copyText: "Copy Text",
+    copiedText: "Copied!",
+    printPdf: "Print PDF",
+    stackBadge: "Full Arsenal (+12 Years)",
     stackTitle: "Technical Stack & Career Tools",
     stackSubtitle: "Exhaustive breakdown of technologies and methodologies mastered over 12+ years",
+    stackSearchPlaceholder: "Search tool (e.g. React, Python, SQL, Docker...)",
+    stackClear: "Clear",
+    contactBadge: "Direct Channels",
     contactTitle: "Contact & Engagement",
     contactSubtitle: "Direct channels to initiate freelance collaborations or hiring discussions",
     emailLabel: "Email Address",
     phoneLabel: "Direct Phone",
     linkedinLabel: "LinkedIn Profile",
     portfolioLabel: "Web Portfolio",
+    bookMeetingLabel: "Schedule a 1-on-1 Call",
+    bookMeetingSub: "Pick a date and time on my Google Calendar",
+    bookMeeting: "Book a Meeting",
+    copyEmail: "Copy Email",
+    callPhone: "Call Phone",
+    openProfile: "Open Profile",
+    footerBuiltWith: "Built with",
     experiences: [
       {
         company: "ACCENTURE",
@@ -433,7 +540,8 @@ export const translations: Record<Language, Translation> = {
       coverLetter: "Cover Letter",
       stack: "Stack Complet",
       contact: "Contact",
-      downloadPdf: "📥 Télécharger le PDF"
+      downloadPdf: "📥 Télécharger le PDF",
+      bookMeeting: "Réserver un RDV"
     },
     hero: {
       subtitle: "Senior Full Stack Lead & Architecte Frontend",
@@ -441,12 +549,27 @@ export const translations: Record<Language, Translation> = {
       bio: "+12 ans d'expérience dans la direction d'équipes techniques, la conception d'architectures numériques évolutives et la transformation de défis complexes.",
       status: "🟢 Disponible pour projets Freelance & Contrats",
       contactBtn: "💬 Me Contacter",
-      viewCoverBtn: "✉️ Voir la Cover Letter"
+      viewCoverBtn: "✉️ Voir la Cover Letter",
+      bookMeetingBtn: "📅 Réserver un RDV",
+      metricYears: "Années d'Expérience",
+      metricConsulting: "Conseil & Entreprise",
+      metricStack: "Frontend & Backend",
+      metricLanguages: "Support Multilingue"
     },
+    expBadge: "Parcours Professionnel",
     expTitle: "Expérience Professionnelle",
     expSubtitle: "Parcours de leadership et de développement technique dans des projets d'envergure",
+    expHighlight: "Conseil Indépendant",
+    expStackTitle: "Architecture Frontend & Stack",
+    expStackFeatured: "Technologies Clés :",
+    eduBadge: "Diplômes & Certifications",
     eduTitle: "Parcours Académique & Certifications",
     eduSubtitle: "Formation universitaire, masters et diplômes officiels réglementés",
+    eduDegreeLabel: "Diplôme Universitaire",
+    eduMasterLabel: "Master de Spécialisation",
+    eduCertLabel: "Certification Officielle / Réglementée",
+    eduVerified: "Diplôme Vérifié et Homologué",
+    coverBadge: "Lettre Professionnelle",
     coverTitle: "Lettre de Motivation",
     coverSubtitle: "Proposition de valeur, vocation et flexibilité de collaboration",
     coverTagline: "💡 Passion pour la Technologie & Polyvalence Professionnelle",
@@ -455,14 +578,27 @@ export const translations: Record<Language, Translation> = {
     coverP2: "Tout au long de mon parcours, j'ai conçu des systèmes frontend et backend (React, Next.js, Vue.js, Angular, Node.js) et géré des environnements cloud (GCloud, AWS, Docker). J'aborde la collaboration technique avec une flexibilité maximale : c'est pourquoi je propose mes services aussi bien en <strong>consulting freelance (contrat B2B)</strong> que via <strong>différents types de contrats de travail</strong> (à distance, hybride, temps plein ou au projet), en m'adaptant aux besoins spécifiques de votre organisation.",
     coverP3: "Mon objectif est de continuer à évoluer professionnellement au sein d'équipes ambitieuses, en apportant une vision stratégique, une rigueur technique et un leadership positif. Je serais ravi de vous rencontrer lors d'un entretien pour échanger sur la manière dont mon expérience peut contribuer au succès de vos futurs projets.",
     coverValediction: "Veuillez agréer mes salutations distinguées,\nAlberto Ledesma Ollega",
+    copyText: "Copier le texte",
+    copiedText: "Copié !",
+    printPdf: "Imprimer le PDF",
+    stackBadge: "Stack Technique (+12 Ans)",
     stackTitle: "Stack Technique & Outils de Carrière",
     stackSubtitle: "Bilan exhaustif des technologies et méthodologies maîtrisées sur +12 ans",
+    stackSearchPlaceholder: "Rechercher un outil (ex: React, Python, SQL...)",
+    stackClear: "Effacer",
+    contactBadge: "Canaux Directs",
     contactTitle: "Contact & Prise de Contact",
     contactSubtitle: "Canaux directs pour initier des collaborations freelance ou des recrutements",
     emailLabel: "Adresse E-mail",
     phoneLabel: "Téléphone Direct",
     linkedinLabel: "Profil LinkedIn",
     portfolioLabel: "Portfolio Web",
+    bookMeetingSub: "Choisissez une date et une heure sur Google Calendar",
+    bookMeeting: "Réserver un RDV",
+    copyEmail: "Copier l'Email",
+    callPhone: "Appeler",
+    openProfile: "Ouvrir le Profil",
+    footerBuiltWith: "Développé avec",
     experiences: [
       {
         company: "ACCENTURE",
@@ -599,7 +735,6 @@ export const translations: Record<Language, Translation> = {
         items: [
           { name: "SEO Technique & Core Web Vitals", level: "Spécialiste", badge: "Performance" },
           { name: "Git & Contrôle de Version", level: "Expert (+12 ans)", badge: "Outil" },
-          { name: "Jira / Agilité (Scrum & Kanban)", level: "Lead Technique", badge: "Gestion" },
           { name: "Figma (Figma-to-Code)", level: "Avancé", badge: "UI/UX" },
           { name: "Code Review & Mentorat Technique", level: "Lead Technique", badge: "Leadership" }
         ]
@@ -613,7 +748,8 @@ export const translations: Record<Language, Translation> = {
       coverLetter: "Cover Letter",
       stack: "Stack Completo",
       contact: "Contato",
-      downloadPdf: "📥 Baixar PDF"
+      downloadPdf: "📥 Baixar PDF",
+      bookMeeting: "Agendar Reunião"
     },
     hero: {
       subtitle: "Senior Full Stack Lead & Arquiteto Frontend",
@@ -621,12 +757,27 @@ export const translations: Record<Language, Translation> = {
       bio: "+12 anos de experiência liderando equipes técnicas, projetando arquiteturas digitais escaláveis e transformando desafios complexos em software de alto impacto.",
       status: "🟢 Disponível para projetos Freelance & Contratação",
       contactBtn: "💬 Entrar em Contato",
-      viewCoverBtn: "✉️ Ver Cover Letter"
+      viewCoverBtn: "✉️ Ver Cover Letter",
+      bookMeetingBtn: "📅 Agendar Reunião",
+      metricYears: "Anos de Experiência",
+      metricConsulting: "Consultoria & Empresa",
+      metricStack: "Frontend & Backend",
+      metricLanguages: "Suporte Multilingue"
     },
+    expBadge: "Trajetória Profissional",
     expTitle: "Experiência Profissional",
     expSubtitle: "Trajetória de liderança e desenvolvimento técnico em projetos de grande porte",
-    eduTitle: "Histórico Acadêmico & Certificações",
+    expHighlight: "Consultoria Freelance",
+    expStackTitle: "Arquitetura Frontend & Stack",
+    expStackFeatured: "Stack em Destaque:",
+    eduBadge: "Académico & Certificações",
+    eduTitle: "Histórico Académico & Certificações",
     eduSubtitle: "Formação universitária, mestrados e qualificações oficiais regulamentadas",
+    eduDegreeLabel: "Grau Universitário",
+    eduMasterLabel: "Mestrado de Especialização",
+    eduCertLabel: "Certificação Regulada / Oficial",
+    eduVerified: "Qualificação Verificada e Homologada",
+    coverBadge: "Carta Profissional",
     coverTitle: "Carta de Apresentação",
     coverSubtitle: "Proposta de valor, vocação e flexibilidade de colaboração",
     coverTagline: "💡 Paixão pela Tecnologia & Versatilidade Profissional",
@@ -635,14 +786,28 @@ export const translations: Record<Language, Translation> = {
     coverP2: "Ao longo da minha trajetória, projetei sistemas frontend e backend (React, Next.js, Vue.js, Angular, Node.js) e gerenciei ambientes em nuvem (GCloud, AWS, Docker). Entando a colaboração técnica a partir da máxima flexibilidade: por isso, ofereço meus serviços tanto em modalidade de <strong>consultoria freelance (contrato B2B)</strong> quanto por meio de <strong>diferentes tipos de contratação de trabalho</strong> (remoto, híbrido, tempo integral ou por projetos), adaptando-me às necessidades reais da sua organização.",
     coverP3: "Meu objetivo é continuar evoluindo profissionalmente ao lado de equipes ambiciosas, trazendo visão técnica estratégica, solidez e uma liderança positiva. Terei todo o prazer em agendar uma conversa para aprofundar como minha experiência pode contribuir para o sucesso dos seus próximos projetos.",
     coverValediction: "Atenciosamente,\nAlberto Ledesma Ollega",
+    copyText: "Copiar Texto",
+    copiedText: "Copiado!",
+    printPdf: "Imprimir PDF",
+    stackBadge: "Stack Tecnológico (+12 Anos)",
     stackTitle: "Stack Técnico & Ferramentas de Carreira",
     stackSubtitle: "Detalhamento exaustivo de tecnologias e metodologias dominadas ao longo de +12 anos",
+    stackSearchPlaceholder: "Buscar ferramenta (ex: React, Python, SQL...)",
+    stackClear: "Limpar",
+    contactBadge: "Canais Diretos",
     contactTitle: "Contato & Parcerias",
     contactSubtitle: "Canais diretos para iniciar colaborações freelance ou contratações",
     emailLabel: "E-mail de Contato",
     phoneLabel: "Telefone Direto",
     linkedinLabel: "Perfil Profissional LinkedIn",
     portfolioLabel: "Portfolio Web",
+    bookMeetingLabel: "Agendar Reunião 1-para-1",
+    bookMeetingSub: "Selecione o dia e horário no meu Google Calendar",
+    bookMeeting: "Agendar Reunião",
+    copyEmail: "Copiar Email",
+    callPhone: "Ligar",
+    openProfile: "Abrir Perfil",
+    footerBuiltWith: "Desenvolvido com",
     experiences: [
       {
         company: "ACCENTURE",
@@ -793,7 +958,8 @@ export const translations: Record<Language, Translation> = {
       coverLetter: "Cover Letter",
       stack: "Full Stack",
       contact: "Contact",
-      downloadPdf: "📥 PDF downloaden"
+      downloadPdf: "📥 PDF downloaden",
+      bookMeeting: "Afspraak Inplannen"
     },
     hero: {
       subtitle: "Senior Full Stack Lead & Frontend Architect",
@@ -801,12 +967,27 @@ export const translations: Record<Language, Translation> = {
       bio: "+12 jaar ervaring in het leiden van technische teams, het ontwerpen van schaalbare digitale oplossingen en het omzetten van complexe uitdagingen.",
       status: "🟢 Beschikbaar voor Freelance & Contractopdrachten",
       contactBtn: "💬 Contact Opnemen",
-      viewCoverBtn: "✉️ Bekijk Cover Letter"
+      viewCoverBtn: "✉️ Bekijk Cover Letter",
+      bookMeetingBtn: "📅 Afspraak Inplannen",
+      metricYears: "Jaren Ervaring",
+      metricConsulting: "Consultancy & Bedrijf",
+      metricStack: "Frontend & Backend",
+      metricLanguages: "Meertalige Ondersteuning"
     },
+    expBadge: "Carrière Overzicht",
     expTitle: "Werkervaring",
     expSubtitle: "Staat van dienst in technisch leiderschap en ontwikkeling in grootschalige projecten",
+    expHighlight: "Freelance Consultancy",
+    expStackTitle: "Frontend Architectuur & Stack",
+    expStackFeatured: "Uitgelichte Stack:",
+    eduBadge: "Academisch & Certificaten",
     eduTitle: "Opleiding & Certificeringen",
     eduSubtitle: "Universitaire opleiding, masters en officiële gereguleerde kwalificaties",
+    eduDegreeLabel: "Universitair Diploma",
+    eduMasterLabel: "Specialisatie Master",
+    eduCertLabel: "Officieel Gecertificeerd",
+    eduVerified: "Geverifieerd en Erkend Diploma",
+    coverBadge: "Professionele Brief",
     coverTitle: "Sollicitatiebrief",
     coverSubtitle: "Waardepropositie, roeping en flexibele samenwerkingsopties",
     coverTagline: "💡 Passie voor Technologie & Professionele Veelzijdigheid",
@@ -815,14 +996,28 @@ export const translations: Record<Language, Translation> = {
     coverP2: "Gedurende mijn carrière heb ik frontend- en backend-systemen ontworpen (React, Next.js, Vue.js, Angular, Node.js) en cloudinfrastructuur beheerd (GCloud, AWS, Docker). Ik benader technische samenwerking met maximale flexibiliteit: daarom bied ik mijn diensten aan via <strong>freelance consultancy (B2B-contract)</strong> evenals via <strong>verschillende dienstverbanden</strong> (op afstand, hybride, voltijd of op projectbasis), afgestemd op de specifieke behoeften van uw organisatie.",
     coverP3: "Mijn doel is om professioneel te blijven groeien samen met ambitieuze teams, door strategische visie, technische uitmuntendheid en positief leiderschap bij te dragen. Ik ga graag met u in gesprek om te bespreken hoe mijn ervaring waarde kan toevoegen aan uw toekomstige projecten.",
     coverValediction: "Met vriendelijke groet,\nAlberto Ledesma Ollega",
+    copyText: "Tekst Kopiëren",
+    copiedText: "Gekopieerd!",
+    printPdf: "PDF Afdrukken",
+    stackBadge: "Technologische Stack (+12 Jaar)",
     stackTitle: "Technische Stack & Carrière-tools",
     stackSubtitle: "Uitgebreid overzicht van technologieën en methodologieën beheerst in +12 jaar",
+    stackSearchPlaceholder: "Zoek tool (bijv. React, Python, SQL...)",
+    stackClear: "Wis",
+    contactBadge: "Directe Kanalen",
     contactTitle: "Contact & Samenwerking",
     contactSubtitle: "Directe kanalen om freelance samenwerkingen of sollicitaties te starten",
     emailLabel: "E-mailadres",
     phoneLabel: "Direct Telefoonnummer",
     linkedinLabel: "LinkedIn Profiel",
     portfolioLabel: "Web Portfolio",
+    bookMeetingLabel: "Plan een 1-op-1 Afspraak",
+    bookMeetingSub: "Kies een datum en tijd op mijn Google Calendar",
+    bookMeeting: "Afspraak Inplannen",
+    copyEmail: "E-mail Kopiëren",
+    callPhone: "Bellen",
+    openProfile: "Profiel Openen",
+    footerBuiltWith: "Gebouwd met",
     experiences: [
       {
         company: "ACCENTURE",
@@ -973,7 +1168,8 @@ export const translations: Record<Language, Translation> = {
       coverLetter: "Cover Letter",
       stack: "Full Stack",
       contact: "Kontakt",
-      downloadPdf: "📥 PDF herunterladen"
+      downloadPdf: "📥 PDF herunterladen",
+      bookMeeting: "Termin Vereinbaren"
     },
     hero: {
       subtitle: "Senior Full Stack Lead & Frontend-Architekt",
@@ -981,12 +1177,27 @@ export const translations: Record<Language, Translation> = {
       bio: "+12 Jahre Erfahrung in der Leitung technischer Teams, der Entwicklung skalierbarer digitaler Architekturen und der Transformation komplexer Herausforderungen.",
       status: "🟢 Verfügbar für Freelance-Projekte & Festanstellungen",
       contactBtn: "💬 Kontakt Aufnehmen",
-      viewCoverBtn: "✉️ Cover Letter Anzeigen"
+      viewCoverBtn: "✉️ Cover Letter Anzeigen",
+      bookMeetingBtn: "📅 Termin Vereinbaren",
+      metricYears: "Jahre Erfahrung",
+      metricConsulting: "Beratung & Unternehmen",
+      metricStack: "Frontend & Backend",
+      metricLanguages: "Mehrsprachige Unterstützung"
     },
+    expBadge: "Beruflicher Werdegang",
     expTitle: "Berufserfahrung",
     expSubtitle: "Technische Führung und Entwicklung in hochrangigen Unternehmen",
+    expHighlight: "Freelance Beratung",
+    expStackTitle: "Frontend-Architektur & Stack",
+    expStackFeatured: "Hervorgehobener Stack:",
+    eduBadge: "Akademisch & Zertifikate",
     eduTitle: "Ausbildung & Zertifizierungen",
     eduSubtitle: "Universitätsabschluss, Master-Abschlüsse und offizielle geregelte Qualifikationen",
+    eduDegreeLabel: "Universitätsabschluss",
+    eduMasterLabel: "Spezialisierungs-Master",
+    eduCertLabel: "Offizielle Zertifizierung",
+    eduVerified: "Geprüfter & Anerkannter Abschluss",
+    coverBadge: "Professioneller Brief",
     coverTitle: "Anschreiben",
     coverSubtitle: "Wertversprechen, Berufung und flexible Zusammenarbeit",
     coverTagline: "💡 Leidenschaft für Technologie & Professionelle Vielseitigkeit",
@@ -995,14 +1206,28 @@ export const translations: Record<Language, Translation> = {
     coverP2: "Im Laufe meiner Karriere habe ich Frontend- und Backend-Systeme entwickelt (React, Next.js, Vue.js, Angular, Node.js) und Cloud-Infrastrukturen verwaltet (GCloud, AWS, Docker). Ich verstehe technische Zusammenarbeit mit höchster Flexibilität: Daher biete ich meine Leistungen sowohl im Rahmen von <strong>Freelance-Consulting (B2B-Vertrag)</strong> als auch über <strong>verschiedene Anstellungsverhältnisse</strong> (Remote, Hybrid, Vollzeit oder Projektbasis) an, genau angepasst an die Bedürfnisse Ihrer Organisation.",
     coverP3: "Mein Ziel ist es, mich gemeinsam mit ehrgeizigen Teams weiterzuentwickeln und strategische Vision, technische Exzellenz und positive Führung einzubringen. Ich freue mich auf ein Gespräch, um zu erörtern, wie meine Erfahrung zum Erfolg Ihrer nächsten Initiativen beitragen kann.",
     coverValediction: "Mit freundlichen Grüßen,\nAlberto Ledesma Ollega",
+    copyText: "Text Kopieren",
+    copiedText: "Kopiert!",
+    printPdf: "PDF Drucken",
+    stackBadge: "Technologie-Stack (+12 Jahre)",
     stackTitle: "Technischer Stack & Karriere-Tools",
     stackSubtitle: "Umfassende Aufschlüsselung aller in +12 Jahren beherrschten Technologien",
+    stackSearchPlaceholder: "Tool suchen (z. B. React, Python, SQL...)",
+    stackClear: "Löschen",
+    contactBadge: "Direkte Kanäle",
     contactTitle: "Kontakt & Anfragen",
     contactSubtitle: "Direkte Kanäle zur Einleitung von Freelance-Projekten oder Anstellungen",
     emailLabel: "E-Mail-Adresse",
     phoneLabel: "Direkttelefon",
     linkedinLabel: "LinkedIn-Profil",
     portfolioLabel: "Web-Portfolio",
+    bookMeetingLabel: "1-zu-1 Termin Vereinbaren",
+    bookMeetingSub: "Wählen Sie Datum und Uhrzeit im Google Calendar",
+    bookMeeting: "Termin Vereinbaren",
+    copyEmail: "E-Mail Kopieren",
+    callPhone: "Anrufen",
+    openProfile: "Profil Öffnen",
+    footerBuiltWith: "Entwickelt mit",
     experiences: [
       {
         company: "ACCENTURE",

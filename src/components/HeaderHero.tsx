@@ -2,16 +2,15 @@
 
 import React from 'react';
 import Image from 'next/image';
-import { Language, translations } from '@/data/translations';
-import { Mail, Phone, Linkedin, ArrowRight, FileText, CheckCircle2, Sparkles } from 'lucide-react';
+import { useLanguage } from '@/context/LanguageContext';
+import { Mail, Phone, Linkedin, ArrowRight, FileText, Sparkles, Calendar } from 'lucide-react';
 
 interface HeaderHeroProps {
-  currentLang: Language;
-  onNavigate: (sectionId: string) => void;
+  onNavigate?: (sectionId: string) => void;
 }
 
-export const HeaderHero: React.FC<HeaderHeroProps> = ({ currentLang, onNavigate }) => {
-  const t = translations[currentLang];
+export const HeaderHero: React.FC<HeaderHeroProps> = () => {
+  const { t, currentLang } = useLanguage();
 
   return (
     <section id="hero" className="relative py-12 md:py-16 overflow-hidden">
@@ -50,11 +49,13 @@ export const HeaderHero: React.FC<HeaderHeroProps> = ({ currentLang, onNavigate 
 
               {/* Title & Name */}
               <div className="space-y-1">
-                <p className="text-sm font-extrabold uppercase tracking-widest text-blue-400">
+                <p className="text-xs sm:text-sm font-extrabold uppercase tracking-widest bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-indigo-300 to-purple-400">
                   {t.hero.subtitle}
                 </p>
-                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight">
-                  Alberto Ledesma Ollega
+                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-white drop-shadow-sm">
+                  <span className="bg-clip-text text-transparent bg-gradient-to-r from-white via-slate-100 to-blue-200">
+                    Alberto Ledesma Ollega
+                  </span>
                 </h1>
               </div>
 
@@ -94,21 +95,31 @@ export const HeaderHero: React.FC<HeaderHeroProps> = ({ currentLang, onNavigate 
 
               {/* CTA Buttons */}
               <div className="pt-4 flex flex-wrap items-center justify-center lg:justify-start gap-3">
-                <button
-                  onClick={() => onNavigate('contact')}
-                  className="flex items-center gap-2 px-6 py-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-sm shadow-xl shadow-blue-600/30 transition-all hover:scale-105"
+                <a
+                  href="https://calendar.app.google/4wyQLVujeH9ANdTr7"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white font-bold text-sm shadow-xl shadow-indigo-600/30 transition-all hover:scale-105 border border-indigo-400/30"
+                >
+                  <Calendar className="w-4 h-4 text-blue-200" />
+                  <span>{t.hero.bookMeetingBtn || 'Schedule a Call'}</span>
+                </a>
+
+                <a
+                  href="#contact"
+                  className="flex items-center gap-2 px-6 py-3 rounded-xl bg-blue-600/20 hover:bg-blue-600/30 border border-blue-500/40 text-blue-300 font-bold text-sm transition-all hover:scale-105"
                 >
                   <span>{t.hero.contactBtn}</span>
                   <ArrowRight className="w-4 h-4" />
-                </button>
+                </a>
 
-                <button
-                  onClick={() => onNavigate('cover')}
-                  className="flex items-center gap-2 px-6 py-3 rounded-xl bg-indigo-600/20 hover:bg-indigo-600/30 border border-indigo-500/40 text-indigo-300 font-bold text-sm transition-all hover:scale-105"
+                <a
+                  href="#cover"
+                  className="flex items-center gap-2 px-6 py-3 rounded-xl bg-slate-900/80 hover:bg-slate-800 border border-slate-800 text-slate-300 font-bold text-sm transition-all hover:scale-105"
                 >
                   <FileText className="w-4 h-4" />
                   <span>{t.hero.viewCoverBtn}</span>
-                </button>
+                </a>
               </div>
 
             </div>
@@ -119,19 +130,19 @@ export const HeaderHero: React.FC<HeaderHeroProps> = ({ currentLang, onNavigate 
           <div className="mt-8 pt-6 border-t border-slate-800/80 grid grid-cols-2 sm:grid-cols-4 gap-4 text-center">
             <div className="p-3 rounded-xl bg-slate-900/40 border border-slate-800/50">
               <span className="block text-2xl font-black text-blue-400">+12</span>
-              <span className="text-xs text-slate-400 font-medium">Años de Experiencia</span>
+              <span className="text-xs text-slate-400 font-medium">{t.hero.metricYears || 'Años de Experiencia'}</span>
             </div>
             <div className="p-3 rounded-xl bg-slate-900/40 border border-slate-800/50">
               <span className="block text-2xl font-black text-purple-400">Freelance & B2B</span>
-              <span className="text-xs text-slate-400 font-medium">Consultoría & Empresa</span>
+              <span className="text-xs text-slate-400 font-medium">{t.hero.metricConsulting || 'Consultoría & Empresa'}</span>
             </div>
             <div className="p-3 rounded-xl bg-slate-900/40 border border-slate-800/50">
               <span className="block text-2xl font-black text-emerald-400">Full Stack</span>
-              <span className="text-xs text-slate-400 font-medium">Frontend & Backend</span>
+              <span className="text-xs text-slate-400 font-medium">{t.hero.metricStack || 'Frontend & Backend'}</span>
             </div>
             <div className="p-3 rounded-xl bg-slate-900/40 border border-slate-800/50">
-              <span className="block text-2xl font-black text-indigo-400">6 Idiomas</span>
-              <span className="text-xs text-slate-400 font-medium">Soporte Multilingüe</span>
+              <span className="block text-2xl font-black text-indigo-400">6 {currentLang.toUpperCase()}</span>
+              <span className="text-xs text-slate-400 font-medium">{t.hero.metricLanguages || 'Soporte Multilingüe'}</span>
             </div>
           </div>
 

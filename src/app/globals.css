@@ -33,13 +33,6 @@
   box-shadow: 0 10px 30px -10px rgba(37, 99, 235, 0.25);
 }
 
-/* Gradient Mesh Text Glow */
-.text-gradient {
-  background: linear-gradient(135deg, #60a5fa 0%, #a855f7 50%, #3b82f6 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
@@ -55,28 +48,98 @@
   background: #3b82f6;
 }
 
-/* Print Optimization */
+/* Page Print Settings */
+@page {
+  size: A4 portrait;
+  margin: 12mm 15mm;
+}
+
+/* Advanced Professional Print Stylesheet */
 @media print {
-  body {
-    background: white !important;
+  /* 1. Global Reset for Clean White Paper */
+  html, body {
+    background: #ffffff !important;
     color: #0f172a !important;
+    font-size: 10.5pt !important;
+    line-height: 1.5 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
   }
-  .no-print {
+
+  /* 2. Hide Non-Print Elements */
+  header, nav, footer, .no-print, [class*="blur-3xl"], [class*="pointer-events-none"], button, input {
     display: none !important;
   }
+
+  /* 3. Universal Readable Dark Text Overrides */
+  p, span, h1, h2, h3, h4, h5, h6, li, td, th, div, a {
+    color: #0f172a !important;
+    -webkit-text-fill-color: #0f172a !important;
+    text-shadow: none !important;
+  }
+
+  /* 4. Subtitles and Secondary Labels */
+  .text-slate-400, .text-slate-300, .text-slate-500 {
+    color: #475569 !important;
+    -webkit-text-fill-color: #475569 !important;
+  }
+
+  /* 5. Brand Color Accents in PDF */
+  .text-blue-400, .text-blue-500, .text-blue-600, .text-indigo-400, .text-indigo-600 {
+    color: #1d4ed8 !important;
+    -webkit-text-fill-color: #1d4ed8 !important;
+    font-weight: 700 !important;
+  }
+  .text-emerald-400, .text-emerald-500, .text-emerald-600 {
+    color: #047857 !important;
+    -webkit-text-fill-color: #047857 !important;
+  }
+  .text-purple-400, .text-purple-500, .text-purple-600 {
+    color: #7e22ce !important;
+    -webkit-text-fill-color: #7e22ce !important;
+  }
+
+  /* 6. Card & Glass Containers Print Overrides */
   .glass-panel, .glass-card {
-    background: white !important;
+    background: #ffffff !important;
     backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
     border: 1px solid #cbd5e1 !important;
+    border-radius: 8px !important;
     box-shadow: none !important;
+    padding: 14px !important;
+    margin-bottom: 12px !important;
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+
+  /* 7. Reset Gradient Clipped Text */
+  .bg-clip-text, .text-transparent {
+    background: none !important;
+    -webkit-background-clip: unset !important;
+    -webkit-text-fill-color: #0f172a !important;
     color: #0f172a !important;
   }
-  .text-gradient {
-    background: none !important;
-    -webkit-text-fill-color: #2563eb !important;
-    color: #2563eb !important;
+
+  /* 8. Page Break Management */
+  section {
+    break-inside: auto !important;
+    page-break-inside: auto !important;
+    margin-bottom: 20px !important;
   }
-  .print-page-break {
-    page-break-before: always;
+
+  .experience-card, .edu-card, .glass-card, [id="cover"] {
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+
+  /* 9. Profile Photo for PDF */
+  img {
+    border-radius: 8px !important;
+    max-width: 100px !important;
+    max-height: 100px !important;
+    border: 1px solid #cbd5e1 !important;
   }
 }

@@ -1,16 +1,12 @@
 'use client';
 
-import React from 'react';
-import { Language, translations } from '@/data/translations';
+import React, { useState } from 'react';
+import { useLanguage } from '@/context/LanguageContext';
 import { FileText, Sparkles, Printer, Copy, Check } from 'lucide-react';
 
-interface CoverLetterSectionProps {
-  currentLang: Language;
-}
-
-export const CoverLetterSection: React.FC<CoverLetterSectionProps> = ({ currentLang }) => {
-  const [copied, setCopied] = React.useState(false);
-  const t = translations[currentLang];
+export const CoverLetterSection: React.FC = () => {
+  const [copied, setCopied] = useState(false);
+  const { t } = useLanguage();
 
   const handleCopy = () => {
     const textToCopy = `${t.coverGreeting}\n\n${t.coverP1.replace(/<[^>]*>/g, '')}\n\n${t.coverP2.replace(/<[^>]*>/g, '')}\n\n${t.coverP3.replace(/<[^>]*>/g, '')}\n\n${t.coverValediction}`;
@@ -27,10 +23,12 @@ export const CoverLetterSection: React.FC<CoverLetterSectionProps> = ({ currentL
         <div className="text-center max-w-3xl mx-auto mb-10 space-y-3">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/30 text-indigo-400 text-xs font-bold uppercase tracking-widest">
             <FileText className="w-3.5 h-3.5" />
-            <span>Professional Letter</span>
+            <span>{t.coverBadge || 'Professional Letter'}</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-black text-white tracking-tight">
-            {t.coverTitle}
+          <h2 className="text-3xl sm:text-4xl font-black tracking-tight text-white">
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-white via-indigo-100 to-blue-300">
+              {t.coverTitle}
+            </span>
           </h2>
           <p className="text-slate-400 text-sm sm:text-base">
             {t.coverSubtitle}
@@ -49,19 +47,21 @@ export const CoverLetterSection: React.FC<CoverLetterSectionProps> = ({ currentL
 
             <div className="flex items-center gap-2 no-print">
               <button
+                type="button"
                 onClick={handleCopy}
                 className="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-slate-900 border border-slate-800 hover:border-slate-700 text-slate-300 hover:text-white text-xs font-semibold transition-all"
               >
                 {copied ? <Check className="w-4 h-4 text-emerald-400" /> : <Copy className="w-4 h-4" />}
-                <span>{copied ? 'Copiado' : 'Copiar Texto'}</span>
+                <span>{copied ? (t.copiedText || '¡Copiado!') : (t.copyText || 'Copiar Texto')}</span>
               </button>
 
               <button
+                type="button"
                 onClick={() => window.print()}
                 className="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold transition-all"
               >
                 <Printer className="w-4 h-4" />
-                <span>Imprimir PDF</span>
+                <span>{t.printPdf || 'Imprimir PDF'}</span>
               </button>
             </div>
           </div>

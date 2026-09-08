@@ -1,15 +1,11 @@
 'use client';
 
 import React from 'react';
-import { Language, translations } from '@/data/translations';
-import { Briefcase, Calendar, CheckCircle, Code2, Layers, Cpu } from 'lucide-react';
+import { useLanguage } from '@/context/LanguageContext';
+import { Briefcase, Calendar, CheckCircle } from 'lucide-react';
 
-interface ExperienceSectionProps {
-  currentLang: Language;
-}
-
-export const ExperienceSection: React.FC<ExperienceSectionProps> = ({ currentLang }) => {
-  const t = translations[currentLang];
+export const ExperienceSection: React.FC = () => {
+  const { t } = useLanguage();
 
   return (
     <section id="experience" className="py-12 sm:py-16 scroll-mt-24">
@@ -19,10 +15,12 @@ export const ExperienceSection: React.FC<ExperienceSectionProps> = ({ currentLan
         <div className="text-center max-w-3xl mx-auto mb-12 space-y-3">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/30 text-blue-400 text-xs font-bold uppercase tracking-widest">
             <Briefcase className="w-3.5 h-3.5" />
-            <span>Career Journey</span>
+            <span>{t.expBadge || 'Career Journey'}</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-black text-white tracking-tight">
-            {t.expTitle}
+          <h2 className="text-3xl sm:text-4xl font-black tracking-tight text-white">
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-white via-slate-100 to-blue-300">
+              {t.expTitle}
+            </span>
           </h2>
           <p className="text-slate-400 text-sm sm:text-base">
             {t.expSubtitle}
@@ -51,7 +49,7 @@ export const ExperienceSection: React.FC<ExperienceSectionProps> = ({ currentLan
                       </h3>
                       {exp.highlight && (
                         <span className="px-2.5 py-0.5 rounded-full text-xs font-extrabold bg-amber-500/10 border border-amber-500/30 text-amber-400">
-                          Consultoría Freelance
+                          {t.expHighlight || 'Consultoría Freelance'}
                         </span>
                       )}
                     </div>
@@ -81,21 +79,25 @@ export const ExperienceSection: React.FC<ExperienceSectionProps> = ({ currentLan
                   ))}
                 </ul>
 
-                {/* Tech Stack Footer Chips */}
-                <div className="pt-4 border-t border-slate-800/60 grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
-                  <div className="p-2.5 rounded-xl bg-slate-900/60 border border-slate-800">
-                    <span className="block font-bold text-blue-400 uppercase tracking-wider text-[10px]">Frontend</span>
-                    <span className="text-slate-300 font-semibold">{exp.stack.f}</span>
+                {/* Technical Stack Pills */}
+                {exp.stack && (
+                  <div className="pt-3 border-t border-slate-800/60 flex flex-wrap items-center gap-3 text-xs">
+                    <span className="font-extrabold uppercase tracking-wider text-slate-400">
+                      {t.expStackFeatured || 'Stack Destacado:'}
+                    </span>
+                    <div className="flex flex-wrap gap-2">
+                      <span className="px-2.5 py-1 rounded-lg bg-blue-950/60 border border-blue-800/50 text-blue-300 font-semibold">
+                        {exp.stack.f}
+                      </span>
+                      <span className="px-2.5 py-1 rounded-lg bg-purple-950/60 border border-purple-800/50 text-purple-300 font-semibold">
+                        {exp.stack.l}
+                      </span>
+                      <span className="px-2.5 py-1 rounded-lg bg-slate-900 border border-slate-800 text-slate-300 font-semibold">
+                        {exp.stack.d}
+                      </span>
+                    </div>
                   </div>
-                  <div className="p-2.5 rounded-xl bg-slate-900/60 border border-slate-800">
-                    <span className="block font-bold text-purple-400 uppercase tracking-wider text-[10px]">Lógica & Servicios</span>
-                    <span className="text-slate-300 font-semibold">{exp.stack.l}</span>
-                  </div>
-                  <div className="p-2.5 rounded-xl bg-slate-900/60 border border-slate-800">
-                    <span className="block font-bold text-emerald-400 uppercase tracking-wider text-[10px]">QA & DevOps</span>
-                    <span className="text-slate-300 font-semibold">{exp.stack.d}</span>
-                  </div>
-                </div>
+                )}
 
               </div>
 

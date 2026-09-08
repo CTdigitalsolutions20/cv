@@ -1,17 +1,14 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Language, translations } from '@/data/translations';
-import { Cpu, Search, Layers, Database, Cloud, Wrench, Sparkles, Code2 } from 'lucide-react';
+import { useLanguage } from '@/context/LanguageContext';
+import { Cpu, Search, Layers, Database, Cloud, Wrench, Code2 } from 'lucide-react';
 
-interface StackSectionProps {
-  currentLang: Language;
-}
+interface StackSectionProps {}
 
-export const StackSection: React.FC<StackSectionProps> = ({ currentLang }) => {
+export const StackSection: React.FC<StackSectionProps> = () => {
   const [searchTerm, setSearchTerm] = useState('');
-  const [activeCategory, setActiveCategory] = useState<string>('all');
-  const t = translations[currentLang];
+  const { t } = useLanguage();
 
   const categoryIcons: Record<number, React.ElementType> = {
     0: Code2,
@@ -38,10 +35,12 @@ export const StackSection: React.FC<StackSectionProps> = ({ currentLang }) => {
         <div className="text-center max-w-3xl mx-auto space-y-3">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/30 text-blue-400 text-xs font-bold uppercase tracking-widest">
             <Cpu className="w-3.5 h-3.5" />
-            <span>Full Arsenal (+12 Years)</span>
+            <span>{t.stackBadge || 'Full Arsenal (+12 Years)'}</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-black text-white tracking-tight">
-            {t.stackTitle}
+          <h2 className="text-3xl sm:text-4xl font-black tracking-tight text-white">
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-white via-cyan-100 to-blue-300">
+              {t.stackTitle}
+            </span>
           </h2>
           <p className="text-slate-400 text-sm sm:text-base">
             {t.stackSubtitle}
@@ -56,15 +55,16 @@ export const StackSection: React.FC<StackSectionProps> = ({ currentLang }) => {
               type="text"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              placeholder="Buscar herramienta (ej: React, Python, SQL, Docker, HeyGen, AI...)"
+              placeholder={t.stackSearchPlaceholder || 'Buscar herramienta (ej: React, Python, SQL...)'}
               className="w-full pl-12 pr-4 py-3.5 rounded-2xl bg-slate-900/90 border border-slate-800 text-white placeholder-slate-500 text-sm font-medium focus:outline-none focus:border-blue-500 shadow-xl transition-all"
             />
             {searchTerm && (
               <button
+                type="button"
                 onClick={() => setSearchTerm('')}
                 className="absolute right-4 top-1/2 -translate-y-1/2 text-xs font-bold text-slate-400 hover:text-white"
               >
-                Limpiar
+                {t.stackClear || 'Limpiar'}
               </button>
             )}
           </div>
