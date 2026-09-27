@@ -96,7 +96,7 @@ export const HeaderHero: React.FC<HeaderHeroProps> = () => {
               {/* CTA Buttons */}
               <div className="pt-4 flex flex-wrap items-center justify-center lg:justify-start gap-3">
                 <a
-                  href="https://calendar.app.google/4wyQLVujeH9ANdTr7"
+                  href="https://calendar.app.google/VQq6effJ1AsbmxAh6"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white font-bold text-sm shadow-xl shadow-indigo-600/30 transition-all hover:scale-105 border border-indigo-400/30"

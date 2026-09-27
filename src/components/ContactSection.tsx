@@ -15,7 +15,7 @@ export const ContactSection: React.FC<ContactSectionProps> = () => {
   const phone = '+34622281415';
   const phoneFormatted = '+34 622 281 415';
   const linkedinUrl = 'https://www.linkedin.com/in/alberto-ledesma-ollega-6727a651/';
-  const calendarUrl = 'https://calendar.app.google/4wyQLVujeH9ANdTr7';
+  const calendarUrl = 'https://calendar.app.google/VQq6effJ1AsbmxAh6';
 
   const copyToClipboard = (text: string, type: 'email' | 'phone') => {
     navigator.clipboard.writeText(text);

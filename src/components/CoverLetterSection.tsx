@@ -6,7 +6,7 @@ import { FileText, Sparkles, Printer, Copy, Check } from 'lucide-react';
 
 export const CoverLetterSection: React.FC = () => {
   const [copied, setCopied] = useState(false);
-  const { t } = useLanguage();
+  const { t, currentLang } = useLanguage();
 
   const handleCopy = () => {
     const textToCopy = `${t.coverGreeting}\n\n${t.coverP1.replace(/<[^>]*>/g, '')}\n\n${t.coverP2.replace(/<[^>]*>/g, '')}\n\n${t.coverP3.replace(/<[^>]*>/g, '')}\n\n${t.coverValediction}`;
@@ -57,7 +57,14 @@ export const CoverLetterSection: React.FC = () => {
 
               <button
                 type="button"
-                onClick={() => window.print()}
+                onClick={() => {
+                  const originalTitle = document.title;
+                  document.title = `CV_Alberto_Ledesma_Ollega_${currentLang.toUpperCase()}`;
+                  window.print();
+                  setTimeout(() => {
+                    document.title = originalTitle;
+                  }, 1000);
+                }}
                 className="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold transition-all"
               >
                 <Printer className="w-4 h-4" />

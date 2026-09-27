@@ -38,21 +38,20 @@ export const Navbar: React.FC<NavbarProps> = ({
     { id: 'contact', href: '#contact', label: t.nav.contact, icon: Mail },
   ];
 
-  // Dynamic PDF URL based on current language
-  const pdfUrl = currentLang === 'es' ? '/CV_Alberto_Ledesma_Espanol.pdf' : '/CV_Alberto_Ledesma_English.pdf';
-  const pdfFilename = currentLang === 'es' ? 'CV_Alberto_Ledesma_Espanol.pdf' : 'CV_Alberto_Ledesma_English.pdf';
-
   const handleSelectLang = (code: Language) => {
     changeLanguage(code);
     setLangDropdownOpen(false);
     setMobileMenuOpen(false);
   };
 
-  const handlePdfClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    if (currentLang !== 'es' && currentLang !== 'en') {
-      e.preventDefault();
-      window.print();
-    }
+  const handlePdfClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    const originalTitle = document.title;
+    document.title = `CV_Alberto_Ledesma_Ollega_${currentLang.toUpperCase()}`;
+    window.print();
+    setTimeout(() => {
+      document.title = originalTitle;
+    }, 1000);
   };
 
   return (
@@ -64,8 +63,12 @@ export const Navbar: React.FC<NavbarProps> = ({
           href="#hero"
           className="flex items-center gap-2 group text-left focus:outline-none flex-shrink-0"
         >
-          <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-lg bg-gradient-to-tr from-blue-600 via-indigo-600 to-purple-600 flex items-center justify-center text-white font-black text-sm sm:text-base shadow-md shadow-blue-500/20 group-hover:scale-105 transition-transform border border-blue-400/30">
-            AL
+          <div className="relative w-8 h-8 sm:w-9 sm:h-9 rounded-xl overflow-hidden border border-blue-400/40 shadow-md shadow-blue-500/20 group-hover:scale-105 transition-transform shrink-0 bg-slate-900">
+            <img 
+              src="/foto.jpg" 
+              alt="Alberto Ledesma" 
+              className="w-full h-full object-cover object-top"
+            />
           </div>
           <div className="hidden sm:block">
             <span className="font-extrabold text-white tracking-tight text-xs lg:text-sm group-hover:text-blue-400 transition-colors block leading-tight">
@@ -111,7 +114,6 @@ export const Navbar: React.FC<NavbarProps> = ({
               aria-label="Seleccionar idioma"
             >
               <Globe className="w-3.5 h-3.5 text-blue-400 flex-shrink-0" />
-              <span className="text-sm leading-none">{currentLangObj.flag}</span>
               <span className="uppercase tracking-wider font-extrabold">{currentLangObj.label}</span>
               <ChevronDown className={`w-3 h-3 text-slate-400 transition-transform duration-200 ${langDropdownOpen ? 'rotate-180 text-blue-400' : ''}`} />
             </button>
@@ -151,7 +153,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
           {/* Schedule a Call CTA Button */}
           <a
-            href="https://calendar.app.google/4wyQLVujeH9ANdTr7"
+            href="https://calendar.app.google/VQq6effJ1AsbmxAh6"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white font-bold text-xs shadow-sm shadow-indigo-600/20 transition-all hover:scale-105 active:scale-95 border border-indigo-400/30 whitespace-nowrap"
@@ -162,18 +164,15 @@ export const Navbar: React.FC<NavbarProps> = ({
           </a>
 
           {/* Download PDF Direct Button */}
-          <a
-            href={pdfUrl}
-            download={pdfFilename}
+          <button
+            type="button"
             onClick={handlePdfClick}
-            target="_blank"
-            rel="noopener noreferrer"
             className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs shadow-sm shadow-emerald-600/20 transition-all hover:scale-105 active:scale-95 whitespace-nowrap"
             title={`Descargar PDF`}
           >
             <Download className="w-3.5 h-3.5 flex-shrink-0" />
             <span>PDF</span>
-          </a>
+          </button>
         </div>
 
         {/* Mobile Controls (<MD) */}
@@ -250,14 +249,13 @@ export const Navbar: React.FC<NavbarProps> = ({
                   key={lang.code}
                   type="button"
                   onClick={() => handleSelectLang(lang.code)}
-                  className={`flex items-center justify-center gap-1.5 p-2 rounded-lg border text-xs font-bold transition-all ${
+                  className={`flex items-center justify-center p-2 rounded-lg border text-xs font-bold transition-all ${
                     currentLang === lang.code
                       ? 'border-blue-500 bg-blue-600/30 text-blue-300 font-extrabold shadow-sm'
                       : 'border-slate-800 bg-slate-900 text-slate-300 hover:border-slate-700'
                   }`}
                 >
-                  <span className="text-sm leading-none">{lang.flag}</span>
-                  <span className="font-extrabold text-[11px]">{lang.label}</span>
+                  <span className="font-extrabold text-[11px]">{lang.label} - {lang.name}</span>
                 </button>
               ))}
             </div>
@@ -266,7 +264,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           {/* Action Buttons (Compact Row) */}
           <div className="pt-1 grid grid-cols-2 gap-2">
             <a
-              href="https://calendar.app.google/4wyQLVujeH9ANdTr7"
+              href="https://calendar.app.google/VQq6effJ1AsbmxAh6"
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => setMobileMenuOpen(false)}
@@ -276,11 +274,8 @@ export const Navbar: React.FC<NavbarProps> = ({
               <span>Reunión</span>
             </a>
 
-            <a
-              href={pdfUrl}
-              download={pdfFilename}
-              target="_blank"
-              rel="noopener noreferrer"
+            <button
+              type="button"
               onClick={(e) => {
                 setMobileMenuOpen(false);
                 handlePdfClick(e);
@@ -289,7 +284,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             >
               <Download className="w-3.5 h-3.5" />
               <span>PDF</span>
-            </a>
+            </button>
           </div>
 
         </div>

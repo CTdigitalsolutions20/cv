@@ -150,11 +150,13 @@ export const TimelapseSection: React.FC = () => {
     return [...filteredMilestones].reverse();
   }, [filteredMilestones]);
 
-  // Handle Play / Timelapse walkthrough mode (10 seconds per tag, auto-deploys and closes details modal)
+  // Handle Play / Timelapse walkthrough mode with dynamic durations:
+  // - Work experiences: 15 seconds (15000ms)
+  // - Education / Certifications: 5 seconds (5000ms)
   useEffect(() => {
     if (!isPlaying) {
       if (playbackTimerRef.current) {
-        clearInterval(playbackTimerRef.current);
+        clearTimeout(playbackTimerRef.current);
         playbackTimerRef.current = null;
       }
       return;
@@ -166,35 +168,34 @@ export const TimelapseSection: React.FC = () => {
       return;
     }
 
-    // Ensure active milestone modal is open for current step
     const currentIdx = activeStepIndex === null ? 0 : activeStepIndex;
-    if (playbackList[currentIdx]) {
-      setSelectedMilestone(playbackList[currentIdx]);
+    const currentMilestone = playbackList[currentIdx];
+
+    if (currentMilestone) {
+      setSelectedMilestone(currentMilestone);
     }
 
-    playbackTimerRef.current = setInterval(() => {
-      setActiveStepIndex((prevIndex) => {
-        const current = prevIndex === null ? 0 : prevIndex;
-        const next = current + 1;
-        if (next >= playbackList.length) {
-          setIsPlaying(false);
-          setSelectedMilestone(null);
-          return 0;
-        }
-        if (playbackList[next]) {
-          setSelectedMilestone(playbackList[next]);
-        }
-        return next;
-      });
-    }, 10000); // 10 seconds per milestone step
+    // Determine step duration: 15s for work, 5s for education/certification
+    const stepDuration = currentMilestone && currentMilestone.category === 'work' ? 15000 : 5000;
+
+    playbackTimerRef.current = setTimeout(() => {
+      const nextIdx = currentIdx + 1;
+      if (nextIdx >= playbackList.length) {
+        setIsPlaying(false);
+        setSelectedMilestone(null);
+        setActiveStepIndex(null);
+      } else {
+        setActiveStepIndex(nextIdx);
+      }
+    }, stepDuration);
 
     return () => {
       if (playbackTimerRef.current) {
-        clearInterval(playbackTimerRef.current);
+        clearTimeout(playbackTimerRef.current);
         playbackTimerRef.current = null;
       }
     };
-  }, [isPlaying, playbackList]);
+  }, [isPlaying, activeStepIndex, playbackList]);
 
   // Smooth scroll into view whenever active step changes
   useEffect(() => {
@@ -589,12 +590,13 @@ export const TimelapseSection: React.FC = () => {
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md animate-fade-in">
           <div className="relative w-full max-w-2xl bg-slate-900 border border-slate-700 rounded-3xl p-6 sm:p-8 shadow-2xl space-y-6 max-h-[90vh] overflow-y-auto">
             
-            {/* 10-Second Auto-Play Progress Bar */}
+            {/* Dynamic Auto-Play Progress Bar (15s work / 5s education) */}
             {isPlaying && (
               <div className="w-full bg-slate-800/80 h-1.5 rounded-full overflow-hidden mb-2">
                 <div 
                   key={selectedMilestone.id} 
                   className="h-full bg-gradient-to-r from-blue-500 via-indigo-500 to-amber-400 animate-timelapse-progress" 
+                  style={{ animationDuration: selectedMilestone.category === 'work' ? '15s' : '5s' }}
                 />
               </div>
             )}
@@ -615,7 +617,9 @@ export const TimelapseSection: React.FC = () => {
                   <Sparkles className="w-4 h-4 text-amber-400 animate-spin-slow" />
                   <span>Modo Recorrido Activo · Paso {activeStepIndex + 1} de {playbackList.length}</span>
                 </div>
-                <span className="text-[11px] font-mono text-amber-400">10s / etiqueta</span>
+                <span className="text-[11px] font-mono text-amber-400 font-extrabold">
+                  {selectedMilestone.category === 'work' ? '15s (Trabajo)' : '5s (Estudios)'}
+                </span>
               </div>
             )}
 
