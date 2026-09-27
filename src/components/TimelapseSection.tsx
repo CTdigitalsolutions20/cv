@@ -145,47 +145,79 @@ export const TimelapseSection: React.FC = () => {
     });
   }, [milestones, filter, searchQuery]);
 
-  // Handle Play / Timelapse walkthrough mode
+  // Playback list in chronological order (oldest to newest: 2008 -> 2026)
+  const playbackList = useMemo(() => {
+    return [...filteredMilestones].reverse();
+  }, [filteredMilestones]);
+
+  // Handle Play / Timelapse walkthrough mode (10 seconds per tag, auto-deploys and closes details modal)
   useEffect(() => {
-    if (isPlaying) {
-      // Chronological order for playback (oldest to newest: 2008 -> 2026)
-      const playbackList = [...filteredMilestones].reverse();
-      if (playbackList.length === 0) {
-        setIsPlaying(false);
-        return;
+    if (!isPlaying) {
+      if (playbackTimerRef.current) {
+        clearInterval(playbackTimerRef.current);
+        playbackTimerRef.current = null;
       }
+      return;
+    }
 
-      const currentIndex = activeStepIndex === null ? 0 : (activeStepIndex + 1) % playbackList.length;
-      setActiveStepIndex(currentIndex);
+    if (playbackList.length === 0) {
+      setIsPlaying(false);
+      setSelectedMilestone(null);
+      return;
+    }
 
-      const currentItem = playbackList[currentIndex];
+    // Ensure active milestone modal is open for current step
+    const currentIdx = activeStepIndex === null ? 0 : activeStepIndex;
+    if (playbackList[currentIdx]) {
+      setSelectedMilestone(playbackList[currentIdx]);
+    }
+
+    playbackTimerRef.current = setInterval(() => {
+      setActiveStepIndex((prevIndex) => {
+        const current = prevIndex === null ? 0 : prevIndex;
+        const next = current + 1;
+        if (next >= playbackList.length) {
+          setIsPlaying(false);
+          setSelectedMilestone(null);
+          return 0;
+        }
+        if (playbackList[next]) {
+          setSelectedMilestone(playbackList[next]);
+        }
+        return next;
+      });
+    }, 10000); // 10 seconds per milestone step
+
+    return () => {
+      if (playbackTimerRef.current) {
+        clearInterval(playbackTimerRef.current);
+        playbackTimerRef.current = null;
+      }
+    };
+  }, [isPlaying, playbackList]);
+
+  // Smooth scroll into view whenever active step changes
+  useEffect(() => {
+    if (activeStepIndex !== null && playbackList[activeStepIndex]) {
+      const currentItem = playbackList[activeStepIndex];
       if (currentItem && itemRefs.current[currentItem.id]) {
         itemRefs.current[currentItem.id]?.scrollIntoView({
           behavior: 'smooth',
           block: 'center',
         });
       }
-
-      playbackTimerRef.current = setTimeout(() => {
-        if (currentIndex === playbackList.length - 1) {
-          setIsPlaying(false);
-        }
-      }, 3000);
-    } else {
-      if (playbackTimerRef.current) clearTimeout(playbackTimerRef.current);
     }
-
-    return () => {
-      if (playbackTimerRef.current) clearTimeout(playbackTimerRef.current);
-    };
-  }, [isPlaying, activeStepIndex, filteredMilestones]);
+  }, [activeStepIndex, playbackList]);
 
   const togglePlay = () => {
     if (isPlaying) {
       setIsPlaying(false);
+      setSelectedMilestone(null);
     } else {
-      if (activeStepIndex === null || activeStepIndex >= filteredMilestones.length - 1) {
-        setActiveStepIndex(0);
+      const startIndex = activeStepIndex === null || activeStepIndex >= playbackList.length - 1 ? 0 : activeStepIndex;
+      setActiveStepIndex(startIndex);
+      if (playbackList[startIndex]) {
+        setSelectedMilestone(playbackList[startIndex]);
       }
       setIsPlaying(true);
     }
@@ -194,6 +226,14 @@ export const TimelapseSection: React.FC = () => {
   const resetPlay = () => {
     setIsPlaying(false);
     setActiveStepIndex(null);
+    setSelectedMilestone(null);
+  };
+
+  const closeModal = () => {
+    setSelectedMilestone(null);
+    if (isPlaying) {
+      setIsPlaying(false);
+    }
   };
 
   return (
@@ -379,11 +419,11 @@ export const TimelapseSection: React.FC = () => {
               <div className="flex items-center gap-2">
                 <Sparkles className="w-4 h-4 text-blue-400 animate-spin" />
                 <span className="font-bold">
-                  Modo Recorrido Activo: Paso {activeStepIndex + 1} de {filteredMilestones.length}
+                  Modo Recorrido Activo: Paso {activeStepIndex + 1} de {playbackList.length} (Cambiando cada 5s)
                 </span>
               </div>
               <span className="text-[11px] font-mono text-blue-300">
-                {filteredMilestones[filteredMilestones.length - 1 - activeStepIndex]?.yearDisplay}
+                {playbackList[activeStepIndex]?.yearDisplay}
               </span>
             </div>
           )}
@@ -400,7 +440,7 @@ export const TimelapseSection: React.FC = () => {
             {filteredMilestones.map((item, index) => {
               const isWork = item.category === 'work';
               const isRightSide = !isWork; // Work on Left, Education on Right for dual branch
-              const isHighlightedStep = isPlaying && activeStepIndex !== null && filteredMilestones[filteredMilestones.length - 1 - activeStepIndex]?.id === item.id;
+              const isHighlightedStep = activeStepIndex !== null && playbackList[activeStepIndex]?.id === item.id;
               
               return (
                 <div
@@ -549,14 +589,35 @@ export const TimelapseSection: React.FC = () => {
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md animate-fade-in">
           <div className="relative w-full max-w-2xl bg-slate-900 border border-slate-700 rounded-3xl p-6 sm:p-8 shadow-2xl space-y-6 max-h-[90vh] overflow-y-auto">
             
+            {/* 10-Second Auto-Play Progress Bar */}
+            {isPlaying && (
+              <div className="w-full bg-slate-800/80 h-1.5 rounded-full overflow-hidden mb-2">
+                <div 
+                  key={selectedMilestone.id} 
+                  className="h-full bg-gradient-to-r from-blue-500 via-indigo-500 to-amber-400 animate-timelapse-progress" 
+                />
+              </div>
+            )}
+
             {/* Modal Close Button */}
             <button
               type="button"
-              onClick={() => setSelectedMilestone(null)}
+              onClick={closeModal}
               className="absolute top-5 right-5 p-2 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white transition-colors"
             >
               <X className="w-5 h-5" />
             </button>
+
+            {/* Auto-Play Mode Header Pill */}
+            {isPlaying && activeStepIndex !== null && (
+              <div className="flex items-center justify-between gap-2 px-3 py-1.5 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs font-bold">
+                <div className="flex items-center gap-1.5">
+                  <Sparkles className="w-4 h-4 text-amber-400 animate-spin-slow" />
+                  <span>Modo Recorrido Activo · Paso {activeStepIndex + 1} de {playbackList.length}</span>
+                </div>
+                <span className="text-[11px] font-mono text-amber-400">10s / etiqueta</span>
+              </div>
+            )}
 
             {/* Modal Header */}
             <div className="space-y-2">
@@ -626,23 +687,25 @@ export const TimelapseSection: React.FC = () => {
             )}
 
             {/* Modal Footer CTA */}
-            <div className="pt-4 border-t border-slate-800 flex items-center justify-between">
-              <button
-                type="button"
-                onClick={() => setSelectedMilestone(null)}
-                className="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-bold transition-colors"
-              >
-                Cerrar Inspector
-              </button>
-
-              <a
-                href="#contact"
-                onClick={() => setSelectedMilestone(null)}
-                className="flex items-center gap-1.5 px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs shadow-lg shadow-blue-600/30 transition-all"
-              >
-                <span>Contactar para esta experiencia</span>
-                <ExternalLink className="w-3.5 h-3.5" />
-              </a>
+            <div className="pt-4 border-t border-slate-800 flex items-center justify-between gap-3">
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={closeModal}
+                  className="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-bold transition-colors"
+                >
+                  Cerrar Inspector
+                </button>
+                {isPlaying && (
+                  <button
+                    type="button"
+                    onClick={() => setIsPlaying(false)}
+                    className="px-3 py-2 rounded-xl bg-amber-500/20 border border-amber-500/40 text-amber-300 hover:bg-amber-500/30 text-xs font-bold transition-colors"
+                  >
+                    Pausar Recorrido
+                  </button>
+                )}
+              </div>
             </div>
 
           </div>

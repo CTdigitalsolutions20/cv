@@ -143,3 +143,18 @@
     border: 1px solid #cbd5e1 !important;
   }
 }
+
+/* Timelapse 10-Second Progress Bar Animation */
+@keyframes timelapseProgress {
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+.animate-timelapse-progress {
+  animation: timelapseProgress 10s linear forwards;
+}
+
